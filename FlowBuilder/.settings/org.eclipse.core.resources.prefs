@@ -1,0 +1,16 @@
+#Sun Apr 21 13:15:29 GMT 2013
+eclipse.preferences.version=1
+encoding//WEB-INF/FlowBuilder.tld=SHIFT_JIS
+encoding//WEB-INF/jsp=UTF-8
+encoding//WEB-INF/jsp/common/coolMenu4.jsp=SHIFT_JIS
+encoding//WEB-INF/jsp/common/header.jsp=SHIFT_JIS
+encoding//WEB-INF/jsp/common/scheduleCss.jsp=SHIFT_JIS
+encoding//WEB-INF/jsp/flowbuilder/joblist/joblist_body.jsp=UTF-8
+encoding//WEB-INF/jsp/layouts/flowbuilderDefaultLayout.jsp=SHIFT_JIS
+encoding//data/log4j/fileXmlBean.properties=SHIFT_JIS
+encoding//java/ApplicationResources.properties.UTF8=UTF-8
+encoding//java/conf/fbuilder/SystemConfig.properties=SHIFT_JIS
+encoding//java/flowbuilder/presentation/webcmn/taglibs/PartJobCreator.java=UTF-8
+encoding//scripts/flowbuilder.js=UTF-8
+encoding/java=SHIFT_JIS
+encoding/scripts=SHIFT_JIS

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<organization>
+	<org1 name="（株）ＢＮＩ会社" id="001">
+		<org2 name="開発部" id="0011">
+			<org3 name="第一開発部" id="00111">
+				<org4 name="第一開発部(第一グループ)" id="001111">
+				</org4>
+				<org4 name="第一開発部(第二グループ)" id="001112">
+				</org4>
+			</org3>
+			<org3 name="第二開発部" id="00112">
+				<org4 name="第二開発部(第一グループ)" id="001121">
+				</org4>
+				<org4 name="第二開発部(第二グループ)" id="001122">
+				</org4>
+			</org3>
+			<org3 name="第三開発部" id="00113">
+			</org3>
+		</org2>
+		<org2 name="SI事業部" id="00120">
+		</org2>
+		<org2 name="人力资源部" id="00130">
+		</org2>
+		<org2 name="財務総務部" id="00140">
+		</org2>
+		<org2 name="システム管理部" id="00150">
+		</org2>
+		<org2 name="品質管理部" id="00160">
+		</org2>
+		<org2 name="管理部" id="00170">
+		</org2>
+		<org2 name="東京事務所" id="00180">
+		</org2>
+		<org2 name="技術支援部" id="00190">
+		</org2>
+		<org2 name="総経理室" id="00200">
+		</org2>
+		<org2 name="研修センター" id="00210">
+		</org2>
+	</org1>
+</organization>

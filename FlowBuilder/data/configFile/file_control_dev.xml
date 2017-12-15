@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<files>
+	<manage>
+		<file>
+			<caption>案件番号管理ＸＭＬ</caption>
+			<name>job_control.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\manage\\</dir>
+		</file> 
+		<file> 
+			<caption>一覧管理ＸＭＬ</caption>
+			<name>job_list.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\manage\\</dir>
+		</file>
+		<file> 
+			<caption>ユーザ管理ＸＭＬ</caption>
+			<name>users.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\manage\\</dir>
+		</file>
+		<file> 
+			<caption>組織管理ＸＭＬ</caption>
+			<name>organization.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\manage\\</dir>
+		</file>
+		<file> 
+			<caption>役割管理ＸＭＬ</caption>
+			<name>roles.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\manage\\</dir>
+		</file>
+		<file> 
+			<caption>状態色ＸＭＬ</caption>
+			<name>colors.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\manage\\</dir>
+		</file>
+	</manage>
+	<template>
+		<file id="0001">
+			<caption>セキュリティ申込書</caption>
+			<name>flow_template_0001.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\template\\</dir>
+			<view>jobshow/security/jobshow_security.jsp</view>
+		</file>
+		<file id="0002">
+			<caption>設備申請</caption>
+			<name>flow_template_0002.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\template\\</dir>
+			<view>jobshow/equipment/jobshow_equipment.jsp</view>
+		</file>
+		<file id="0003">
+			<caption>回覧案件</caption>
+			<name>flow_template_0003.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\template\\</dir>
+			<view>jobshow/circular/jobshow_circular.jsp</view>
+		</file>
+		<file id="0004">
+			<caption>休假申請</caption>
+			<name>flow_template_0004.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\template\\</dir>
+			<view>jobshow/vacation/jobshow_vacation.jsp</view>
+		</file>
+		<file id="0005">
+			<caption>出張申請</caption>
+			<name>flow_template_0005.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\template\\</dir>
+			<view>jobshow/business/jobshow_business.jsp</view>
+		</file>	
+	　　<file id="0006">
+			<caption>残業申請</caption>
+			<name>flow_template_0006.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\template\\</dir>
+			<view>jobshow/zanngyou/jobshow_zanngyou.jsp</view>
+		</file>				
+	</template>
+	<job>
+		<file>
+			<caption>案件ファイル</caption>
+			<name>job_nnnnn.xml</name>
+			<dir>D:\\Tomcat5.0\\webapps\\FlowBuilder\\data\\job\\</dir>
+		</file>
+	</job>
+</files>

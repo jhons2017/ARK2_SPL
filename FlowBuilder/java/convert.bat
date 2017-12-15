@@ -1,0 +1,3 @@
+del ApplicationResources.properties
+native2ascii -encoding utf8 ApplicationResources.properties.UTF8 ApplicationResources.properties
+pause

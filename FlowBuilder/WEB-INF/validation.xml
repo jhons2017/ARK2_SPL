@@ -1,0 +1,3780 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<!--
+ * =================================================================
+ * NO.83XXXXXX
+ * ITEM = 001 ; REV = 01 ; DATE 2006/03/30
+ *
+ * (c) 2005 Yamatake Corporation All Rights Reserved.
+ * 
+ * ORIGINAL SOURCE INFORMATION
+ * 
+ * REVISION HISTORY
+ *			REV.00 2005/12/27 BY. ZQQ (WXHX)
+ *			REV.01 2006/03/30 BY. DHW (WXHX)
+ *  			サクサ追加機能の対応
+ * =================================================================
+-->
+<!--
+ Validationの設定ファイル。
+ 検証するフィールドと検証方法を記述する。
+ 
+ indexedListPropertyにて、「integer」を使用できない。
+ 理由：数値チェック(depends="integer")を行う場合、未入力の行があった場合、
+ その行以下の項目がチェックされません。多分、nullは無視されたと思います。
+ 対応策として、maskを使用して、数値チェックを行う。
+-->
+<form-validation>
+	<global>
+		<!-- 年月(YYYY/MM形式) -->
+		<constant>
+			<constant-name>yearMonth</constant-name>
+			<constant-value>^((19[5-9][0-9])|(20((50|[0-4][0-9]))))\/((1[0-2])|(0?[1-9]))$</constant-value>
+		</constant>
+		<constant>
+			<constant-name>DATE_PATTERN</constant-name>
+			<constant-value>yyyy/MM/dd</constant-value>
+		</constant>
+		<constant>
+			<constant-name>MIN_DATE</constant-name>
+			<constant-value>1950/1/1</constant-value>
+		</constant>
+		<constant>
+			<constant-name>MAX_DATE</constant-name>
+			<constant-value>2050/12/31</constant-value>
+		</constant>
+		<constant>
+			<constant-name>maskFileName</constant-name>
+			<constant-value>\.[Jj][Pp][Gg]$|[Pp][Nn][Gg]$|[Gg][Ii][Ff]$|[Jj][Pp][Ee][Gg]$</constant-value>
+		</constant>
+		<constant>
+			<constant-name>password</constant-name>
+			<constant-value>^[a-zA-Z0-9{}\[\],.&lt;&gt;;:?/|`~!@#$%^&amp;*()_=+-]*$</constant-value>
+		</constant>
+		<constant>
+			<constant-name>telephone</constant-name>
+			<constant-value>^[0-9#\*\-]*$</constant-value>
+		</constant>
+		<constant>
+			<constant-name>intRange0-999</constant-name>
+			<constant-value>^([0-9]?[0-9]?[0-9])$</constant-value>
+		</constant>
+		<constant>
+			<constant-name>intRange0-59</constant-name>
+			<constant-value>^([0-5]?[0-9])$</constant-value>
+		</constant>
+
+	</global>
+
+	<formset>	
+		<!-- ログインユーザ -->
+		<form name="LoginForm">		
+			<field property="loginUser" depends="required">
+				<arg0 key="Login.Label.User"/>
+			</field>
+			
+			<field property="password" depends="required">
+				<arg0 key="Login.Label.Password"/>
+			</field>
+		</form>
+		
+		<!-- 警報履歴一覧 -->
+		<form name="Obsam_Alarm_AlarmQueryForm">		
+			<field property="pointName" depends="maxbytes">
+				<arg0 key="Alarm.Label.PointName"/>
+				<arg1 key="64" resource="false"/>
+    			<arg2 key="128" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>128</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 司令書一覧 -->
+		<form name="Obsam_Alarm_CommandQueryForm">		
+			<field property="pointName" depends="maxbytes">
+				<arg0 key="Alarm.Label.PointName"/>
+				<arg1 key="64" resource="false"/>
+    			<arg2 key="128" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>128</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 司令書発行 -->
+		<form name="Obsam_Alarm_CommandForm">
+			
+				<!-- 警報種別 -->	
+    		<field property="alarmType" depends="required">
+    			<arg0 key="Alarm.Label.AlarmType"/>
+    		</field>
+			
+			<!-- 現場到着日時（年月日） -->	
+    		<field property="arrivalDateDay" depends="dateEx,dateRange">
+    			 <arg0 key="Alarm.Label.ArrivalDate"/>
+    			 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+    		</field>
+			
+			<!-- 現場到着日時（年月日） -->	
+    		<field property="finishDateDay" depends="dateEx,dateRange">
+    			 <arg0 key="Alarm.Label.FinishDate"/>
+    			 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+    		</field>
+			
+			<!-- 箇所 -->	
+    		<field property="alarmPlace" depends="maxbytes">
+    			<arg0 key="Alarm.Label.AlarmPlace"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			
+			<!-- 原因詳細 -->	
+    		<field property="causeDetail" depends="maxbytes">
+    			<arg0 key="Alarm.Label.CauseDetail"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+			
+			<!-- 処置詳細 -->	
+    		<field property="operationDetail" depends="maxbytes">
+    			<arg0 key="Alarm.Label.OperationDetail"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+			
+			<!-- 備考 -->	
+    		<field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+			<!-- 作業シートのBean -->
+			<!-- 立会者 -->
+			<field property="worker" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Alarm.Label.Worker"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 工数（時間） -->
+			<field property="workHour" indexedListProperty="workSheetList" depends="mask">
+				<arg0 key="Alarm.Label.WorkNum"/>
+    			<arg1 key="errors.intRange0-999"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-999}</var-value>
+    			</var>
+			</field>
+			<!-- 工数（分） -->
+			<field property="workMinutes" indexedListProperty="workSheetList" depends="mask">
+				<arg0 key="Alarm.Label.WorkNum"/>
+    			<arg1 key="errors.intRange0-59"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-59}</var-value>
+    			</var>
+			</field>
+			<!-- 作業開始時刻（年月日） -->
+			<field property="workStartTime" indexedListProperty="workSheetList" depends="dateEx,dateRange">
+				 <arg0 key="Alarm.Label.WorkTimeFrom"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 作業終了時刻（年月日） -->
+			<field property="workEndTime" indexedListProperty="workSheetList" depends="dateEx,dateRange">
+				 <arg0 key="Alarm.Label.WorkTimeTo"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 業者1 -->
+			<field property="agent1" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Alarm.Label.Agent"/>
+    			<arg1 key="14" resource="false"/>
+    			<arg2 key="28" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>28</var-value>
+    			</var>
+			</field>
+			<!-- 業者2 -->
+			<field property="agent2" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Alarm.Label.Agent"/>
+    			<arg1 key="14" resource="false"/>
+    			<arg2 key="28" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>28</var-value>
+    			</var>
+			</field>
+			<!-- 業者3 -->
+			<field property="agent3" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Alarm.Label.Agent"/>
+    			<arg1 key="14" resource="false"/>
+    			<arg2 key="28" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>28</var-value>
+    			</var>
+			</field>
+			<!-- 作業内容 -->
+			<field property="workDetail" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Alarm.Label.WorkContext"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 備考 -->
+			<field property="note" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+			</field>
+			
+			<!-- 作業経過の日時(年月日) -->
+		    <field property="workDateTime" indexedListProperty="workBeanList" depends="requiredif">
+    			<arg0 key="Alarm.Label.DateTime"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>workItem</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[0]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+				<var>
+					<var-name>field[1]</var-name>
+					<var-value>deleteFlag</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[1]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[1]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+    		</field>
+			<!-- 作業経過の出来事 -->
+		    <field property="workItem" indexedListProperty="workBeanList" depends="requiredif">
+    			<arg0 key="Alarm.Label.WorkItem"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>workDateTime</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[0]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+				<var>
+					<var-name>field[1]</var-name>
+					<var-value>deleteFlag</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[1]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[1]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+    		</field>
+			<!-- 作業経過の日時(年月日) -->
+			<field property="workDateTime" indexedListProperty="workBeanList" depends="dateEx,dateRange">
+				 <arg0 key="Alarm.Label.DateTime"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 作業経過の出来事 -->
+			<field property="workItem" indexedListProperty="workBeanList" depends="maxbytes">
+    			<arg0 key="Alarm.Label.WorkItem"/>
+    			<arg1 key="40" resource="false"/>
+    			<arg2 key="80" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>80</var-value>
+    			</var>
+			</field>
+		</form>	
+		
+		<!-- 建物一覧 -->
+		<form name="Obsam_BuilInfo_BuilQueryForm">
+			<!-- 建物名称 -->	
+    		<field property="builName" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.BuildingName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+		</form>	
+				
+		<!-- 仮登録建物一覧 -->
+		<form name="Obsam_BuilInfo_SAXABuilQueryForm">
+		    <!-- 建物名 -->
+		    <field property="builName" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.BuildingName"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+			</field>
+		</form>	
+		
+		<!-- 建物登録、変更-->
+		<form name="Obsam_BuilInfo_BuilForm">
+    		<!-- 建物名称 -->	
+    		<field property="builName" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.BuildingName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+			<!-- 建物名称カナ -->	
+    		<field property="builKana" depends="required,maxbytes">
+    			<arg0 key="Common.Label.Furigana"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+			<!-- 住所 -->	
+    		<field property="address" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.Address"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			<!-- 最寄り駅 -->	
+    		<field property="station" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.NearestStation"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+			<!-- 建物構造 -->	
+    		<field property="constructure" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.BuilConstructure"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+			<!-- 建物用途 -->	
+    		<field property="builUse" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.BuilUse"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+			<!-- 延床面積 -->	
+			<field property="totalArea" depends="integer,intRange">
+				<arg0 key="BuilInfo.Label.TotalArea"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999999</var-value>
+    			</var>
+			</field>
+			<!-- 建築面積 -->	
+			<field property="builArea" depends="integer,intRange">
+				<arg0 key="BuilInfo.Label.BuilArea"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999999</var-value>
+    			</var>
+			</field>
+			<!-- フロア数地上 -->	
+			<field property="stories" depends="integer,intRange">
+				<arg0 key="BuilInfo.Label.Stories"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- フロア数地下 -->	
+			<field property="baseStories" depends="integer,intRange">
+				<arg0 key="BuilInfo.Label.BaseStories"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- 建物高さ -->	
+			<field property="builHeight" depends="integer,intRange">
+				<arg0 key="BuilInfo.Label.BuilHeight"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+     		<!-- 竣工日 -->	
+    		<field property="completionDate" depends="dateEx,dateRange">
+    			 <arg0 key="BuilInfo.Label.CompletionDate"/>
+    			 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+    		</field>
+			<!-- 備考 -->	
+    		<field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			<!-- 管轄警察署 -->	
+    		<field property="policeDept" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.PoliceDept"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+			<!-- 管轄警察署の電話番号 -->
+			<field property="policeDeptTel" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="policeDeptTel" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- 管轄消防署 -->	
+    		<field property="fireDept" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.FireDept"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+			<!-- 管轄消防署の電話番号 -->
+			<field property="fireDeptTel" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="fireDeptTel" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- 管轄保健所 -->	
+    		<field property="healthDept" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.HealthDept"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+			<!-- 管轄保健所の電話番号 -->
+			<field property="healthDeptTel" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="healthDeptTel" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- 会社名 -->
+			<field property="company" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.CompanyName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+			<!-- 管理担当部署 -->
+			<field property="section" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Section"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+			<!-- 担当者 -->
+			<field property="person" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Person"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+			<!-- 郵便番号 -->
+			<field property="zipCode" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.ZipCode"/>
+    			<arg1 key="5" resource="false"/>
+    			<arg2 key="10" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    		</field>
+			<!-- 住所 -->
+			<field property="address" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Address"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			<!-- 電話 -->
+			<field property="telNo" indexedListProperty="ownerBeanList" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="telNo" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Telephone"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- 携帯電話 -->
+			<field property="cellNo" indexedListProperty="ownerBeanList" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="cellNo" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.CellPhone"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- FAX -->
+			<field property="faxNo" indexedListProperty="ownerBeanList" depends="mask">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="faxNo" indexedListProperty="ownerBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- E-mail -->
+			<field property="mailAddress" indexedListProperty="ownerBeanList" depends="email,maxbytes">
+    			<arg0 key="BuilInfo.Label.EMail"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>		
+		</form>
+		<!-- 建物情報設定-->
+		<form name="Obsam_BuilInfo_BuilPictureForm">
+    		<field property="file" depends="mask">
+				<msg name="mask" key="errors.builFile.invalid" />
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${maskFileName}</var-value>
+    			</var>
+    		</field>
+    		<field property="file" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.BuilOutSidePicture"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+		</form>
+		<!-- 管理物件一覧 -->
+		<form name="Obsam_BuilInfo_PropertyQueryForm">
+		    <!-- 物件Code -->
+		    <field property="propertyCode" depends="intRange">
+				<arg0 key="BuilInfo.Label.PropertyCode"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>               
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>0</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+			<!-- 物件名称 -->	
+    		<field property="propertyName" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.PropertyName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+    		<!-- オーナー名称 -->	
+    		<field property="ownerName" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.OwnerName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+		</form>	
+		
+		<!-- 仮登録管理物件一覧 -->
+		<form name="Obsam_BuilInfo_InterimEntryPropertyQueryForm">
+		    <!-- 管理物件名 -->
+		    <field property="propertyName" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.PropertyName"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+			</field>
+		</form>	
+		<!-- 管理物件登録 -->
+		<form name="Obsam_BuilInfo_PropertyForm">
+		    <!-- 物件Code -->
+		    <field property="propertyCode" depends="required,intRange">
+				<arg0 key="BuilInfo.Label.PropertyCode"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>               
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>0</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+			<!-- 管理物件名 -->
+			<field property="propertyName" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.PropertyName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- フリガナ -->
+			<field property="propertyKana" depends="required,maxbytes">
+    			<arg0 key="Common.Label.Furigana"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 管理物件名(略称) -->
+			<field property="propertyAbName" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.PropertyAbName"/>
+    			<arg1 key="15" resource="false"/>
+    			<arg2 key="30" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>30</var-value>
+    			</var>
+			</field>
+			<!-- フリガナ(略称) -->
+			<field property="propertyAbKana" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.BuilAbFiCaNa"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 管轄管理所 -->
+			<field property="depotNo" depends="required">
+    			<arg0 key="BuilInfo.Label.ChargeDepot"/>   			
+			</field>
+			<!-- フロア・区画 -->
+			<field property="block" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Block"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 備考 -->
+			<field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+		    <!-- 契約開始日 -->
+			<field property="contractDate" depends="dateEx,dateRange">
+				 <arg0 key="BuilInfo.Label.ContractStartDate"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 担当者 -->
+			<field property="person" indexedListProperty="contactBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Person"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+			</field>
+			<!-- 郵便番号 -->
+			<field property="zipCode" indexedListProperty="contactBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.ZipCode"/>
+    			<arg1 key="5" resource="false"/>
+    			<arg2 key="10" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>10</var-value>
+    			</var>
+			</field>
+			<!-- 住所 -->
+			<field property="address" indexedListProperty="contactBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Address"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 電話 -->
+			<field property="telNo" indexedListProperty="contactBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Telephone"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+			</field>
+			<field property="telNo"  indexedListProperty="contactBeanList" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<!-- 携帯電話 -->
+			<field property="cellNo" indexedListProperty="contactBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.CellPhone"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+			</field>
+			<field property="cellNo"  indexedListProperty="contactBeanList" depends="mask">
+    			<arg0 key="BuilInfo.Label.CellPhone"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<!-- Fax -->
+			<field property="faxNo" indexedListProperty="contactBeanList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+			</field>
+			<field property="faxNo"  indexedListProperty="contactBeanList" depends="mask">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<!-- E-mail -->
+			<field property="mailAddress" indexedListProperty="contactBeanList" depends="email,maxbytes">
+    			<arg0 key="BuilInfo.Label.EMail"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 物件ルート設定-->
+		<form name="Obsam_BuilInfo_RoutePictureForm">
+    		<field property="file" depends="mask">
+				<msg name="mask" key="errors.builFile.invalid" />
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${maskFileName}</var-value>
+    			</var>
+    		</field>
+    		<field property="file" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.RoutePicture"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+		</form>
+		
+		<!-- 管理所登録-->
+		<form name="Obsam_BuilInfo_DepotForm">
+			<!-- 管理所名 -->	
+    		<field property="depotName" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.DepotName"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+			<!-- フリガナ -->	
+    		<field property="depotKana" depends="required,maxbytes">
+    			<arg0 key="Common.Label.Furigana"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+    		<!-- 郵便番号 -->  
+			<field property="zipCode" depends="required,maxbytes">
+				<arg0 key="BuilInfo.Label.PostCode"/>
+    			<arg1 key="5" resource="false"/>
+    			<arg2 key="10" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>10</var-value>
+    			</var>
+			</field>
+			<!-- 住所 -->	
+    		<field property="address" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.Address"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			<!-- 電話番号 -->	
+    		<field property="telNo" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+    		<field property="telNo" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+ 			<!-- FAX番号 -->	
+    		<field property="faxNo" depends="mask">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+    		<field property="faxNo" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+ 			<!-- 最寄駅 -->	
+    		<field property="station" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.NearestStation"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+ 			<!-- 所属センター -->	
+    		<field property="centerNo" depends="required">
+    			<arg0 key="BuilInfo.Label.BelongCenter"/>
+     		</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			
+ 		   	<!-- 携帯情報の電話番号 -->
+			<field property="cellPhoneNo" indexedListProperty="cellPhoneList" depends="mask">
+			    <arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			
+			<field property="cellPhoneNo" indexedListProperty="cellPhoneList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+ 		   	<!-- 携帯情報のメールアドレス -->
+			<field property="mailAddress" indexedListProperty="cellPhoneList" depends="email">
+    			<arg0 key="BuilInfo.Label.MailAddress"/>
+    		</field>
+			<field property="mailAddress" indexedListProperty="cellPhoneList" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.MailAddress"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+		</form>
+		
+		<!-- オーナー一覧 -->
+		<form name="Obsam_BuilInfo_OwnerQueryForm">
+   			<!-- オーナー名 -->	
+    		<field property="name" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.OwnerName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+		</form>
+		
+		<!-- オーナー登録 -->
+		<form name="Obsam_BuilInfo_OwnerForm">
+   			<!-- オーナー名 -->	
+    		<field property="name" depends="required,maxbytes">
+    			<arg0 key="BuilInfo.Label.OwnerName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+			<!-- フリガナ -->	
+    		<field property="kana" depends="required,maxbytes">
+    			<arg0 key="Common.Label.Furigana"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+    		<!-- 会社名 -->
+			<field property="company" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.CompanyName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>  
+    		<!-- 管理担当部署 -->
+			<field property="section" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Section"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field> 
+    		<!-- 担当者 -->
+			<field property="person" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Person"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>		
+    		<!-- 郵便番号 -->
+    		<field property="zipCode" depends="maxbytes">
+				<arg0 key="BuilInfo.Label.PostCode"/>
+    			<arg1 key="5" resource="false"/>
+    			<arg2 key="10" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    		</field>    		
+			<!-- 住所 -->	
+    		<field property="address" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Address"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			<!-- 電話 -->
+			<field property="telNo" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="telNo" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Telephone"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- 携帯電話 -->
+			<field property="cellNo" depends="mask">
+    			<arg0 key="BuilInfo.Label.TelephoneNumber"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="cellNo" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.CellPhone"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- FAX -->
+			<field property="faxNo" depends="mask">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="errors.telephone"/>
+      			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${telephone}</var-value>
+    			</var>
+    		</field>
+			<field property="faxNo" depends="maxbytes">
+    			<arg0 key="BuilInfo.Label.Fax"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+    			</var>
+    		</field>
+			<!-- E-mail -->
+			<field property="mailAddress" depends="email,maxbytes">
+    			<arg0 key="BuilInfo.Label.EMail"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+    		</field>
+		</form>
+		
+		<!-- 原因区分一覧 -->
+		<form name="Obsam_Sysconf_CauseListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="20" resource="false"/>
+				<arg2 key="40" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!-- 原因区分登録-->
+		<form name="Obsam_Sysconf_CauseForm">
+			<!-- 原因区分No -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!-- 原因区分Name -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 処置区分一覧 -->
+		<form name="Obsam_Sysconf_OperationListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="20" resource="false"/>
+				<arg2 key="40" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!-- 処置区分登録-->
+		<form name="Obsam_Sysconf_OperationForm">
+			<!-- 処置区分No -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!-- 処置区分Name -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 所属一覧 -->
+		<form name="Obsam_Sysconf_SectionListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="32" resource="false"/>
+				<arg2 key="64" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>64</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!-- 所属登録-->
+		<form name="Obsam_Sysconf_SectionForm">
+			<!-- 所属No -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!-- 所属Name -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="32" resource="false"/>
+    			<arg2 key="64" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>64</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- センター一覧 -->
+		<form name="Obsam_Sysconf_CenterListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="25" resource="false"/>
+				<arg2 key="50" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!--  センター登録-->
+		<form name="Obsam_Sysconf_CenterForm">
+			<!--  センターNo -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!--  センターName -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 対応種別一覧 -->
+		<form name="Obsam_Sysconf_TroubleKindListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="20" resource="false"/>
+				<arg2 key="40" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!--  対応種別登録-->
+		<form name="Obsam_Sysconf_TroubleKindForm">
+			<!--  センターNo -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!--  対応種別Name -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 法規制項目一覧 -->
+		<form name="Obsam_Sysconf_LawRegulationListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="32" resource="false"/>
+				<arg2 key="64" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>64</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!--  法規制項目登録-->
+		<form name="Obsam_Sysconf_LawRegulationForm">
+			<!--  法規制項目No -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!--  法規制項目Name -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="32" resource="false"/>
+    			<arg2 key="64" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>64</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 契約大分類一覧 -->
+		<form name="Obsam_Sysconf_ContractKindFirstListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="20" resource="false"/>
+				<arg2 key="40" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!--  契約大分類登録-->
+		<form name="Obsam_Sysconf_ContractKindFirstForm">
+			<!--  契約大分類No -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!--  契約大分類Name -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 契約中分類一覧 -->
+		<form name="Obsam_Sysconf_ContractKindSecondListForm">
+			<field property="name" indexedListProperty="sysconfList" depends="requiredif, maxbytes">
+				<arg0 key="Common.Label.Name"/>
+				<arg1 key="20" resource="false"/>
+				<arg2 key="40" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<field property="sortOrder" indexedListProperty="sysconfList" depends="requiredif, intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+                <var>
+                  <var-name>field[0]</var-name>
+                  <var-value>no</var-value>
+                </var>
+                <var>
+                  <var-name>fieldIndexed[0]</var-name>
+                  <var-value>true</var-value>
+                </var>
+                <var>
+                  <var-name>fieldTest[0]</var-name>
+                  <var-value>NOTNULL</var-value>
+                </var>
+                <var>
+                  <var-name>min</var-name>
+                  <var-value>1</var-value>
+                </var>
+                <var>
+                  <var-name>max</var-name>
+                  <var-value>9999</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!--  契約中分類登録-->
+		<form name="Obsam_Sysconf_ContractKindSecondForm">
+			<!--  契約中分類No -->
+			<field property="no" depends="required,integer,intRange">
+				<arg0 key="Common.Label.No"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+			<!--  契約中分類Name -->
+			<field property="name" depends="required,maxbytes">
+				<arg0 key="Common.Label.Name"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+				</var>
+			</field>
+			<!-- 表示順序 -->
+			<field property="sortOrder" depends="required,integer,intRange">
+				<arg0 key="Common.Label.DisplayItemSort"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>9999</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 表示件数設定-->
+		<form name="Obsam_Sysconf_LineNumListForm">
+			<!-- 警報 -->
+			<field property="alarm" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.Alarm"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			
+			<!-- 司令書 -->
+			<field property="command" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.Commond"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 不定期 -->
+			<field property="trouble" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.Trouble"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 管理建物台帳 -->
+			<field property="building" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.Building"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- スケジュール(年間) -->
+			<field property="scheduleYear" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.ScheduleYear"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- スケジュール(月間) -->
+			<field property="scheduleMonth" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.ScheduleMonth"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 事例検索 -->
+			<field property="search" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.Search"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- ユーザー設定 -->
+			<field property="user" depends="required,integer,intRange">
+				<arg0 key="SystemConfig.Label.User"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>10</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+		</form>
+		
+		<!-- 司令書メール設定-->
+		<form name="Obsam_Sysconf_SystemConfigForm">
+			<!-- メールサーバーアドレス-->
+			<field property="commandSMTPIpAddress" depends="requiredif,maxbytes">
+    			<arg0 key="SystemConfig.Label.MailServerIp"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+                <var>
+                    <var-name>field[0]</var-name>
+                    <var-value>commandMailEnable</var-value>
+                </var>
+                <var>
+                    <var-name>fieldTest[0]</var-name>
+                    <var-value>EQUAL</var-value>
+                </var>
+                <var>
+                    <var-name>fieldValue[0]</var-name>
+                    <var-value>enable</var-value>
+                </var>
+			</field>
+			<!-- メールサーバーアドレス-->
+			<field property="commandMailAddressFrom" depends="requiredif,maxbytes,email">
+    			<arg0 key="SystemConfig.Label.SenderMailIp"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+                <var>
+                    <var-name>field[0]</var-name>
+                    <var-value>commandMailEnable</var-value>
+                </var>
+                <var>
+                    <var-name>fieldTest[0]</var-name>
+                    <var-value>EQUAL</var-value>
+                </var>
+                <var>
+                    <var-name>fieldValue[0]</var-name>
+                    <var-value>enable</var-value>
+                </var>
+			</field>
+			<!-- メールパスワード-->
+			<field property="commandMailPassword" depends="maxbytes">
+    			<arg0 key="SystemConfig.Label.MailPassword"/>
+    			<arg1 key="16" resource="false"/>
+    			<arg2 key="32" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>32</var-value>
+    			</var>
+			</field>
+		</form>
+		<!-- ユーザー一覧 -->
+		<form name="Obsam_User_UserQueryForm">
+   			<!-- 氏名 -->	
+    		<field property="name" depends="maxbytes">
+    			<arg0 key="User.Label.UserName"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+		</form>
+
+		<!-- ユーザー -->
+		<form name="Obsam_User_UserForm">
+			<!-- ログイン名 -->
+   			<field property="loginName" depends="required,mask">
+				<arg0 key="User.Label.LoginName"/>
+				<arg1 key="errors.halfCharNum"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>^[a-zA-Z0-9]*$</var-value>
+    			</var>
+			</field>
+			<field property="loginName" depends="maxlength">
+				<arg0 key="User.Label.LoginName"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>16</var-value>
+				</var>
+			</field>
+
+			<field property="loginName" depends="minlength">
+				<arg0 key="User.Label.LoginName"/>
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+			</field>
+
+			<!-- パスワード -->
+   			<field property="password" depends="required,mask">
+				<arg0 key="User.Label.Password"/>
+				<arg1 key="errors.halfCharNumSign"/>
+     			<var>
+     				<var-name>mask</var-name>
+    				<var-value>${password}</var-value>
+    			</var>
+			</field>
+
+			<field property="password" depends="maxlength">
+				<arg0 key="User.Label.Password"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+
+			<field property="password" depends="minlength">
+				<arg0 key="User.Label.Password"/>
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+			</field>
+
+			<!-- パスワードAgain -->
+   			<field property="passwordAgain" depends="required,mask">
+				<arg0 key="User.Label.PasswordAgain"/>
+				<arg1 key="errors.halfCharNumSign"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${password}</var-value>
+    			</var>
+			</field>
+
+			<field property="passwordAgain" depends="maxlength">
+				<arg0 key="User.Label.PasswordAgain"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+
+			<field property="passwordAgain" depends="minlength">
+				<arg0 key="User.Label.PasswordAgain"/>
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+			</field>
+			
+    		<!-- 姓 -->	
+    		<field property="familyName" depends="required,maxbytes">
+    			<arg0 key="User.Label.FamilyName"/>
+    			<arg1 key="10" resource="false"/>
+    			<arg2 key="20" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>20</var-value>
+    			</var>
+    		</field>
+			
+			<!-- 名 -->	
+    		<field property="givenName" depends="required,maxbytes">
+    			<arg0 key="User.Label.GivenName"/>
+    			<arg1 key="10" resource="false"/>
+    			<arg2 key="20" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>20</var-value>
+    			</var>
+    		</field>
+			
+			<!-- 姓カナ -->	
+    		<field property="familyKana" depends="required,maxbytes">
+    			<arg0 key="User.Label.FamilyKana"/>
+    			<arg1 key="10" resource="false"/>
+    			<arg2 key="20" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>20</var-value>
+    			</var>
+    		</field>
+			
+			<!-- 名カナ -->	
+    		<field property="givenKana" depends="required,maxbytes">
+    			<arg0 key="User.Label.GivenKana"/>
+    			<arg1 key="10" resource="false"/>
+    			<arg2 key="20" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>20</var-value>
+    			</var>
+    		</field>
+
+   			<!-- 社員番号 -->	
+    		<field property="employeeCode" depends="maxbytes">
+    			<arg0 key="User.Label.EmployeeCode"/>
+    			<arg1 key="6" resource="false"/>
+    			<arg2 key="12" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>12</var-value>
+    			</var>
+    		</field>
+			
+   			<!-- 所属 -->	
+    		<field property="sectionNo" depends="required">
+    			<arg0 key="User.Label.DepartMent"/>
+    		</field>
+			   			
+		</form>
+		<!-- 不定期作業指示書 -->
+		<form name="Obsam_Trouble_TroubleForm">
+			<!-- 管理所 -->
+		    <field property="depotNo" depends="required">
+    			<arg0 key="Trouble.Label.Depot"/>
+    		</field>
+			<!-- 管理物件 -->
+		    <field property="propertyNo" depends="required">
+    			<arg0 key="Trouble.Label.Property"/>
+    		</field>
+			<!-- 登録者 -->
+		    <field property="createUserName" depends="maxbytes">
+    			<arg0 key="Trouble.Label.CreateUser"/>
+    			<arg1 key="20" resource="false"/>
+    			<arg2 key="40" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>40</var-value>
+    			</var>
+    		</field>
+			<!-- 箇所 -->
+		    <field property="troublePlace" depends="maxbytes">
+    			<arg0 key="Trouble.Label.TroubleSpace"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			<!-- 対応種別 -->
+		    <field property="troubleKindNo" depends="required">
+    			<arg0 key="Trouble.Label.TroubleKind"/>
+    		</field>
+			<!-- 対応詳細 -->
+		    <field property="troubleDetail" depends="maxbytes">
+    			<arg0 key="Trouble.Label.TroubleDetail"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+			<!-- 備考 -->
+		    <field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+			<!-- 作業シートのBean -->
+			<!-- 立会者 -->
+			<field property="worker" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Trouble.Label.Worker"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 工数（時間） -->
+			<field property="workHour" indexedListProperty="workSheetList" depends="mask">
+				<arg0 key="Trouble.Label.WorkNum"/>
+    			<arg1 key="errors.intRange0-999"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-999}</var-value>
+    			</var>
+			</field>
+			<!-- 工数（分） -->
+			<field property="workMinutes" indexedListProperty="workSheetList" depends="mask">
+				<arg0 key="Trouble.Label.WorkNum"/>
+    			<arg1 key="errors.intRange0-59"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-59}</var-value>
+    			</var>
+			</field>
+			<!-- 作業開始時刻（年月日） -->
+			<field property="workStartTime" indexedListProperty="workSheetList" depends="dateEx,dateRange">
+				 <arg0 key="Trouble.Label.WorkTimeFrom"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 作業終了時刻（年月日） -->
+			<field property="workEndTime" indexedListProperty="workSheetList" depends="dateEx,dateRange">
+				 <arg0 key="Trouble.Label.WorkTimeTo"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 業者1 -->
+			<field property="agent1" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Trouble.Label.Agent"/>
+    			<arg1 key="14" resource="false"/>
+    			<arg2 key="28" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>28</var-value>
+    			</var>
+			</field>
+			<!-- 業者2 -->
+			<field property="agent2" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Trouble.Label.Agent"/>
+    			<arg1 key="14" resource="false"/>
+    			<arg2 key="28" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>28</var-value>
+    			</var>
+			</field>
+			<!-- 業者3 -->
+			<field property="agent3" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Trouble.Label.Agent"/>
+    			<arg1 key="14" resource="false"/>
+    			<arg2 key="28" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>28</var-value>
+    			</var>
+			</field>
+			<!-- 作業内容 -->
+			<field property="workDetail" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Trouble.Label.WorkContext"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 備考 -->
+			<field property="note" indexedListProperty="workSheetList" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+			</field>
+			
+			<!-- 作業経過の日時(年月日) -->
+		    <field property="workDateTime" indexedListProperty="workBeanList" depends="requiredif">
+    			<arg0 key="Trouble.Label.DateTime"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>workItem</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[0]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+				<var>
+					<var-name>field[1]</var-name>
+					<var-value>deleteFlag</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[1]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[1]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+    		</field>
+			<!-- 作業経過の出来事 -->
+		    <field property="workItem" indexedListProperty="workBeanList" depends="requiredif">
+    			<arg0 key="Trouble.Label.WorkItem"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>workDateTime</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[0]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+				<var>
+					<var-name>field[1]</var-name>
+					<var-value>deleteFlag</var-value>
+				</var>
+				<var>
+					<var-name>fieldIndexed[1]</var-name>
+					<var-value>true</var-value>
+				</var>
+				<var>
+					<var-name>fieldTest[1]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+    		</field>
+			<!-- 作業経過の日時(年月日) -->
+			<field property="workDateTime" indexedListProperty="workBeanList" depends="dateEx,dateRange">
+				 <arg0 key="Trouble.Label.DateTime"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 作業経過の出来事 -->
+			<field property="workItem" indexedListProperty="workBeanList" depends="maxbytes">
+    			<arg0 key="Trouble.Label.WorkItem"/>
+    			<arg1 key="37" resource="false"/>
+    			<arg2 key="74" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>74</var-value>
+    			</var>
+			</field>
+		</form>
+		 
+		<!-- 契約情報登録、変更-->
+		<form name="Obsam_Contract_ContractForm">
+			<!-- 契約作業名 -->
+			<field property="contractName" depends="required,maxbytes">
+				<arg0 key="Contract.Label.ContractTaskName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 契約区分 -->
+			<field property="contractType" depends="required">
+				<arg0 key="Contract.Label.ContractDiv"/>
+   			</field>
+			<!-- 管理所 -->
+			<field property="depotNo" depends="required">
+				<arg0 key="Contract.Label.ManagementPlace"/>
+   			</field>
+			<!-- 管理物件 -->
+			<field property="propertyNo" depends="required">
+				<arg0 key="Contract.Label.ManagementArticle"/>
+   			</field>
+			<!-- 契約大分類 -->
+			<field property="contractKindFirstNo" depends="required">
+				<arg0 key="Contract.Label.ContractMajorDiv"/>
+   			</field>
+			<!-- 契約中分類 -->
+			<field property="contractKindSecondNo" depends="required">
+				<arg0 key="Contract.Label.ContractMediumDiv"/>
+   			</field>
+			<!-- 契約開始日 -->
+			<field property="contractDate" depends="dateEx,dateRange">
+				<arg0 key="Contract.Label.ContractStartDate"/>
+    			<arg1 key="${MIN_DATE}" resource="false"/>
+				<arg2 key="${MAX_DATE}" resource="false"/>
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>${DATE_PATTERN}</var-value>
+				</var>
+				<var>
+					<var-name>minDate</var-name>
+					<var-value>${MIN_DATE}</var-value>
+				</var>
+				<var>
+					<var-name>maxDate</var-name>
+					<var-value>${MAX_DATE}</var-value>
+				</var>
+   			</field>
+			<!-- 周期 -->
+			<field property="workCycle" depends="maxbytes">
+				<arg0 key="Contract.Label.Cycle"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+				</var>
+			</field>
+			<!-- 業者1 -->
+			<field property="agent1" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent1"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 業者2 -->
+			<field property="agent2" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent2"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 業者3 -->
+			<field property="agent3" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent3"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 備考 -->
+			<field property="agent3" depends="maxbytes">
+				<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+				</var>
+			</field>
+	    	<!-- 予定工数：時 -->	
+    		<field property="estimatedManDayHour" depends="integer,intRange,range">
+    			<arg0 key="Contract.Label.EstimatedManHours"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+    		</field>	
+	    	<!-- 予定工数：分 -->	
+    		<field property="estimatedManDayMinute" depends="integer,intRange,range">
+    			<arg0 key="Contract.Label.EstimatedManMinutes"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+    		</field>	
+     	    <!-- 予定日数 -->	
+    		<field property="estimatedDays" depends="requiredif,integer,intRange,range">
+    			<arg0 key="Contract.Label.EstimatedDays"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>1</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>31</var-value>
+    			</var>
+                <var>
+                    <var-name>field[0]</var-name>
+                    <var-value>workingDateType</var-value>
+                </var>
+                <var>
+                    <var-name>fieldTest[0]</var-name>
+                    <var-value>EQUAL</var-value>
+                </var>
+                <var>
+                    <var-name>fieldValue[0]</var-name>
+                    <var-value>byDays</var-value>
+                </var>
+    		</field>	
+	    	<!-- 年間予定工数：時 -->	
+    		<field property="estimatedManYearHour" depends="integer,intRange,range">
+    			<arg0 key="Contract.Label.EstimatedManYearHours"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999999</var-value>
+    			</var>
+    		</field>	
+	    	<!-- 年間予定工数：分 -->	
+    		<field property="estimatedManYearMinute" depends="integer,intRange,range">
+    			<arg0 key="Contract.Label.EstimatedManYearMinutes"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+    		</field>	
+ 			<!-- 作業日指定 -->
+			<field property="workingDateType" depends="required">
+				<arg0 key="Contract.Label.WorkingDateType"/>
+   			</field>  
+		</form>
+		<!-- 契約情報一覧-->
+		<form name="Obsam_Contract_ContractQueryForm">
+			<!-- 契約作業名 -->
+			<field property="contractName" depends="maxbytes">
+				<arg0 key="Contract.Label.ContractTaskName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+		</form>
+		<!-- 特別作業登録-->
+		<form name="Obsam_Schedule_ScheduleCreateForm">
+			<!-- 作業日（開始） -->
+			<field property="taskItemDayFrom" depends="required,dateEx,dateRange">
+    			 <arg0 key="Schedule.Label.TaskItemDayFrom"/>
+    			 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+    		</field>
+    		<!-- 作業日（終了） -->
+			<field property="taskItemDayTo" depends="required,dateEx,dateRange">
+    			 <arg0 key="Schedule.Label.TaskItemDayTo"/>
+    			 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+    		</field>			
+    		<!-- 作業名 -->
+			<field property="taskName" depends="required,maxbytes">
+				<arg0 key="Schedule.Label.TaskName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 管理所 -->
+			<field property="depotNo" depends="required">
+				<arg0 key="Schedule.Label.Depot"/>
+   			</field>
+   			<!-- 管理物件 -->
+			<field property="propertyNo" depends="required">
+				<arg0 key="Schedule.Label.Property"/>
+   			</field>
+   			<!-- 契約大分類 -->
+			<field property="contractKindFirstNo" depends="required">
+				<arg0 key="SystemConfig.Label.ContractKindFirst"/>
+   			</field>
+   			<!-- 契約中分類 -->
+			<field property="contractKindSecondNo" depends="required">
+				<arg0 key="SystemConfig.Label.ContractKindSecond"/>
+   			</field>
+   			<!-- 周期 -->
+			<field property="workCycle" depends="maxbytes">
+				<arg0 key="Schedule.Label.Cycle"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+				</var>
+			</field>
+			<!-- 予定工数（時間） -->	
+			<field property="estimatedManDayHour" depends="integer,intRange">
+				<arg0 key="Contract.Label.EstimatedManHours"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- 予定工数（分） -->	
+			<field property="estimatedManDayMinute" depends="integer,intRange">
+				<arg0 key="Contract.Label.EstimatedManMinutes"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+			</field>
+			<!-- 業者1 -->
+			<field property="agent1" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent1"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 業者2 -->
+			<field property="agent2" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent2"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 業者3 -->
+			<field property="agent3" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent3"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 備考 -->
+		    <field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+		</form>
+		
+		<!-- 特別作業変更-->
+		<form name="Obsam_Schedule_IrregularTaskForm">
+    		<!-- 作業名 -->
+			<field property="taskName" depends="required,maxbytes">
+				<arg0 key="Schedule.Label.TaskName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 管理所 -->
+			<field property="depotNo" depends="required">
+				<arg0 key="Schedule.Label.Depot"/>
+   			</field>
+   			<!-- 管理物件 -->
+			<field property="propertyNo" depends="required">
+				<arg0 key="Schedule.Label.Property"/>
+   			</field>
+   			<!-- 契約大分類 -->
+			<field property="contractKindFirstNo" depends="required">
+				<arg0 key="SystemConfig.Label.ContractKindFirst"/>
+   			</field>
+   			<!-- 契約中分類 -->
+			<field property="contractKindSecondNo" depends="required">
+				<arg0 key="SystemConfig.Label.ContractKindSecond"/>
+   			</field>
+   			<!-- 周期 -->
+			<field property="workCycle" depends="maxbytes">
+				<arg0 key="Schedule.Label.Cycle"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+				</var>
+			</field>
+			<!-- 予定工数（時間） -->	
+			<field property="estimatedManDayHour" depends="integer,intRange">
+				<arg0 key="Contract.Label.EstimatedManHours"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- 予定工数（分） -->	
+			<field property="estimatedManDayMinute" depends="integer,intRange">
+				<arg0 key="Contract.Label.EstimatedManMinutes"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+			</field>
+			<!-- 業者1 -->
+			<field property="agent1" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent1"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 業者2 -->
+			<field property="agent2" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent2"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 業者3 -->
+			<field property="agent3" depends="maxbytes">
+				<arg0 key="Contract.Label.Agent3"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 備考 -->
+		    <field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+		</form>
+		<!-- 月間作業スケジュール一覧 -->
+		<form name="Obsam_Schedule_ScheduleQueryForm">
+   			<!-- 作業スケジュール名 -->
+			<field property="scheduleName" depends="maxbytes">
+    			<arg0 key="Schedule.Label.ScheduleName"/>
+    			<arg1 key="35" resource="false"/>
+    			<arg2 key="70" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>70</var-value>
+    			</var>
+   			</field>
+		</form>
+		<!-- 作業指示書変更 -->
+		<form name="Obsam_Schedule_ScheduleForm">
+   			<!-- 作業スケジュール名 -->
+			<field property="scheduleName" depends="required">
+				<arg0 key="Schedule.Label.ScheduleName"/>
+   			</field>
+   			<!-- 作業スケジュール名 -->
+			<field property="scheduleName" depends="maxbytes">
+    			<arg0 key="Schedule.Label.ScheduleName"/>
+    			<arg1 key="35" resource="false"/>
+    			<arg2 key="70" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>70</var-value>
+    			</var>
+   			</field>
+			<!-- 備考 -->
+		    <field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+    		</field>
+			<!-- 作業日(年月日) -->
+			<field property="taskItemDay" indexedListProperty="taskItemBeans" depends="requiredif,dateEx,dateRange">
+				 <arg0 key="Schedule.Label.TaskDay"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+               	 <var>
+					<var-name>field[0]</var-name>
+					<var-value>taskItemId</var-value>
+				  </var>
+				  <var>
+					<var-name>fieldIndexed[0]</var-name>
+					<var-value>true</var-value>
+				  </var>
+				  <var>
+					<var-name>fieldTest[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				  </var>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 担当者 -->
+			<field property="itemChargeName" indexedListProperty="taskItemBeans" depends="maxbytes">
+    			<arg0 key="Schedule.Label.Charge"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 作業内容 -->
+			<field property="itemContents" indexedListProperty="taskItemBeans" depends="maxbytes">
+    			<arg0 key="Schedule.Label.Contents"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			
+			<!-- 予定工数（時間） -->	
+			<field property="estimatedManDayHour" indexedListProperty="taskItemBeans" depends="mask">
+				<arg0 key="Schedule.Label.EstimatedManDayHour"/>
+    			<arg1 key="errors.intRange0-999"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-999}</var-value>
+    			</var>
+			</field>
+			<!-- 予定工数（分） -->	
+			<field property="estimatedManDayMinute" indexedListProperty="taskItemBeans" depends="mask">
+				<arg0 key="Schedule.Label.EstimatedManDayMinute"/>
+    			<arg1 key="errors.intRange0-59"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-59}</var-value>
+    			</var>
+			</field>
+			<!-- 実績工数（時間） -->	
+			<field property="resultManDayHour" indexedListProperty="taskItemBeans" depends="mask">
+				<arg0 key="Schedule.Label.ResultManDayHour"/>
+    			<arg1 key="errors.intRange0-999"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-999}</var-value>
+    			</var>
+			</field>
+			<!-- 実績工数（分） -->	
+			<field property="resultManDayMinute" indexedListProperty="taskItemBeans" depends="mask">
+				<arg0 key="Schedule.Label.ResultManDayMinute"/>
+    			<arg1 key="errors.intRange0-59"/>
+    			<var>
+    				<var-name>mask</var-name>
+    				<var-value>${intRange0-59}</var-value>
+    			</var>
+			</field>
+			<!-- 所見 -->
+			<field property="remark" depends="maxbytes">
+    			<arg0 key="Schedule.Label.Remark"/>
+    			<arg1 key="60" resource="false"/>
+    			<arg2 key="120" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>120</var-value>
+    			</var>
+			</field>
+		</form>
+		<!-- 作業項目追加用Form -->
+		<form name="Obsam_Schedule_TaskItemForm">
+			<!-- 作業日(年月日) -->
+			<field property="taskItemDay" depends="required,dateEx,dateRange">
+				 <arg0 key="Schedule.Label.TaskDay"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 担当者 -->
+			<field property="chargeName" depends="maxbytes">
+    			<arg0 key="Schedule.Label.Charge"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 作業内容 -->
+			<field property="contents" depends="maxbytes">
+    			<arg0 key="Schedule.Label.Contents"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 予定工数（時間） -->	
+			<field property="estimatedManDayHour" depends="integer,intRange">
+				<arg0 key="Schedule.Label.EstimatedManDayHour"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- 予定工数（分） -->	
+			<field property="estimatedManDayMinute" depends="integer,intRange">
+				<arg0 key="Schedule.Label.EstimatedManDayMinute"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+			</field>
+			<!-- 実績工数（時間） -->	
+			<field property="resultManDayHour" depends="integer,intRange">
+				<arg0 key="Schedule.Label.ResultManDayHour"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- 実績工数（分） -->	
+			<field property="resultManDayMinute" depends="integer,intRange">
+				<arg0 key="Schedule.Label.ResultManDayMinute"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+			</field>
+		</form>
+		<!-- 日間作業スケジュール変更Form-->
+		<form name="Obsam_Schedule_TaskItemDayQueryForm">
+			<!-- 担当者 -->
+			<field property="itemChargeName" indexedListProperty="taskItemDayBeans" depends="maxbytes">
+    			<arg0 key="Schedule.Label.Charge"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 作業内容 -->
+			<field property="itemContents" indexedListProperty="taskItemDayBeans" depends="maxbytes">
+    			<arg0 key="Schedule.Label.Contents"/>
+    			<arg1 key="50" resource="false"/>
+    			<arg2 key="100" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>100</var-value>
+    			</var>
+			</field>
+			<!-- 予定工数（時間） -->	
+			<field property="estimatedManDayHour" indexedListProperty="taskItemDayBeans" depends="integer,intRange">
+				<arg0 key="Schedule.Label.EstimatedManDayHour"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- 予定工数（分） -->	
+			<field property="estimatedManDayMinute" indexedListProperty="taskItemDayBeans" depends="integer,intRange">
+				<arg0 key="Schedule.Label.EstimatedManDayMinute"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+			</field>
+			<!-- 実績工数（時間） -->	
+			<field property="resultManDayHour" indexedListProperty="taskItemDayBeans" depends="integer,intRange">
+				<arg0 key="Schedule.Label.ResultManDayHour"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+			</field>
+			<!-- 実績工数（分） -->	
+			<field property="resultManDayMinute" indexedListProperty="taskItemDayBeans" depends="integer,intRange">
+				<arg0 key="Schedule.Label.ResultManDayMinute"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+			</field>
+		</form>
+		<!-- 業務日誌作成-->
+		<form name="Obsam_Report_DepotDailyReportForm">		   
+			<!-- 最高気温 -->
+			<field property="highestTemperature" depends="floatRange">
+    			<arg0 key="Report.Label.HighestTemperature"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>-50.00</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>50.00</var-value>
+    			</var>
+			</field>
+			<!-- 最低気温 -->
+			<field property="lowestTemperature" depends="floatRange">
+    			<arg0 key="Report.Label.LowestTemperature"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>-50.00</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>50.00</var-value>
+    			</var>
+			</field>
+			<!-- 湿度 -->
+			<field property="humidity" depends="floatRange">
+    			<arg0 key="Report.Label.Humiture"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0.00</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>100.00</var-value>
+    			</var>
+			</field>
+			<!-- 開始日 -->
+			<field property="dayFrom" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayFrom"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 終了日 -->
+			<field property="dayTo" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayTo"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+		</form>
+		<!-- 管理業務日報総括作成-->
+		<form name="Obsam_Report_OwnerDailyReportForm">		   
+			<!-- 開始日 -->
+			<field property="dayFrom" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayFrom"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 終了日 -->
+			<field property="dayTo" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayTo"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+		</form>
+		<!-- 管理業務月報作成-->
+		<form name="Obsam_Report_PropertyMonthlyReportForm">		   
+			<!-- 開始日 -->
+			<field property="dateFrom" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayFrom"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 終了日 -->
+			<field property="dateTo" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayTo"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+		</form>
+		<!-- 管理業務月報総括作成-->
+		<form name="Obsam_Report_OwnerMonthlyReportForm">		   
+			<!-- 開始日 -->
+			<field property="dateFrom" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayFrom"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+			<!-- 終了日 -->
+			<field property="dateTo" depends="required,dateEx,dateRange">
+				 <arg0 key="Report.Label.DayTo"/>
+				 <arg1 key="${MIN_DATE}" resource="false"/>
+				 <arg2 key="${MAX_DATE}" resource="false"/>
+				 <var>
+					 <var-name>datePattern</var-name>
+					 <var-value>${DATE_PATTERN}</var-value>
+				 </var>
+				 <var>
+					 <var-name>minDate</var-name>
+					 <var-value>${MIN_DATE}</var-value>
+				 </var>
+				 <var>
+					 <var-name>maxDate</var-name>
+					 <var-value>${MAX_DATE}</var-value>
+				 </var>
+			</field>
+		</form>
+		
+		<!-- 年間作業一覧（定期・特別）-->
+		<form name="Obsam_Schedule_TaskQueryForm">		   
+			<!-- 作業名 -->
+			<field property="taskName" depends="maxbytes">
+				<arg0 key="Schedule.Label.TaskName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+		</form>
+		<!-- 年間作業変更（定期・特別）-->
+		<form name="Obsam_Schedule_RegularTaskForm">   
+			<!-- 作業名 -->
+			<field property="taskName" depends="required,maxbytes">
+				<arg0 key="Schedule.Label.TaskName"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+				</var>
+			</field>
+			<!-- 契約区分 -->
+			<field property="contractKind" depends="required">
+    			<arg0 key="Schedule.Label.ContractKind"/>   			
+			</field>
+			<!-- 管理所 -->
+			<field property="depotNo" depends="required">
+    			<arg0 key="Schedule.Label.Depot"/>   			
+			</field>
+			<!-- 管理物件 -->
+			<field property="propertyNo" depends="required">
+    			<arg0 key="Schedule.Label.Property"/>   			
+			</field>
+			<!-- 契約大分類 -->
+			<field property="contractKindFirstNo" depends="required">
+    			<arg0 key="Schedule.Label.ContractMajorDiv"/>   			
+			</field>
+			<!-- 契約中分類 -->
+			<field property="contractKindSecondNo" depends="required">
+    			<arg0 key="Schedule.Label.ContractMediumDiv"/>
+			</field>
+	    	<!-- 予定工数：時 -->	
+    		<field property="estimatedManDayHour" depends="integer,intRange,range">
+    			<arg0 key="Schedule.Label.EstimatedManDayHour"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>999</var-value>
+    			</var>
+    		</field>	
+	    	<!-- 予定工数：分 -->	
+    		<field property="estimatedManDayMinute" depends="integer,intRange,range">
+    			<arg0 key="Schedule.Label.EstimatedManDayMinute"/>
+    			<arg1 key="${var:min}" resource="false"/>
+    			<arg2 key="${var:max}" resource="false"/>
+    			<var>
+    				<var-name>min</var-name>
+    				<var-value>0</var-value>
+    			</var>
+    			<var>
+    				<var-name>max</var-name>
+    				<var-value>59</var-value>
+    			</var>
+    		</field>	
+			<!-- 周期 -->
+			<field property="workCycle" depends="maxbytes">
+				<arg0 key="Schedule.Label.Cycle"/>
+    			<arg1 key="12" resource="false"/>
+    			<arg2 key="24" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>24</var-value>
+				</var>
+			</field>
+			<!-- 業者1 -->
+			<field property="agent1" depends="maxbytes">
+    			<arg0 key="Contract.Label.Agent1"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 業者2 -->
+			<field property="agent2" depends="maxbytes">
+    			<arg0 key="Contract.Label.Agent2"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 業者3 -->
+			<field property="agent3" depends="maxbytes">
+    			<arg0 key="Contract.Label.Agent3"/>
+    			<arg1 key="25" resource="false"/>
+    			<arg2 key="50" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>50</var-value>
+    			</var>
+			</field>
+			<!-- 備考 -->	
+    		<field property="note" depends="maxbytes">
+    			<arg0 key="Common.Label.Remark"/>
+    			<arg1 key="400" resource="false"/>
+    			<arg2 key="800" resource="false"/>
+    			<var>
+    				<var-name>maxbytes</var-name>
+    				<var-value>800</var-value>
+    			</var>
+    		</field>
+		</form>
+	</formset>	
+</form-validation>
+ 

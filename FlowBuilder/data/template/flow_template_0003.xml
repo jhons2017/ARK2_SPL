@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<job>
+	<jobinfo cur_org="" cur_role="" cur_userid="" jobid="" name="" orgid="" roleid="" title="" userid="" userip="" date="" tempId=""/>
+	<WorkFlow>
+	　　<name>回覧票</name>
+	　　<step>
+	　　　　<state active="true" current="案件作成" title="作成"/>
+	　　　　<opr act="create" go_org="" go_role="" go_step="案件起案" id="create" name="作成" operator="作成者" orgid="" roleid="" userid=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="案件起案" title="起案待ち"/>
+	　　　　<opr act="save" go_org="" go_role="" go_step="案件起案" id="save" name="保存" operator="保存者" orgid="" roleid="" userid=""/>　
+		<opr act="save" go_org="" go_role="" go_step="回覧中" id="start" name="起案" operator="起案者" orgid="" roleid="" userid=""/>
+		<opr act="disposal" go_org="" go_role="" go_step="" id="disposal" name="廃棄" operator="廃棄者" orgid="" roleid="" userid=""/>
+	　　</step>
+	  　<step>
+	　　　　<state active="false" current="回覧中" title="回覧中"/>
+		<opr act="save" go_org="" go_role="" go_step="案件起案" id="returnSelf" name="引戻し" operator="引戻し者" orgid="" roleid="" userid=""/>
+	　　　　<opr act="save" go_org="" go_role="" go_step="回覧中" id="confirm" name="回覧済" operator="回覧者" orgid="" roleid="" userid=""/>
+		<opr act="save" go_org="" go_role="" go_step="回覧中" id="question" name="問題あり" operator="回覧者" orgid="" roleid="" userid=""/>
+		<opr act="save" go_org="" go_role="" go_step="回覧済" id="apply" name="処理済" operator="回覧者" orgid="" roleid="" userid=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="回覧済" title="回覧済"/>
+		　<opr act="save" go_org="00150" go_role="7000" go_step="中止状態" id="stop" name="中止" operator="中止者" orgid="" roleid="" userid=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="中止状態" title="中止"/>
+	　　　　<opr act="delete" go_org="" go_role="" go_step="" id="delete" name="案件削除" operator="削除者" orgid="" roleid="" userid=""/>
+	　　</step>
+	</WorkFlow>
+	<Document>
+	</Document>
+</job>

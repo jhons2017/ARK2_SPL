@@ -1,0 +1,83 @@
+﻿// @import url(global.css);
+
+/* CoolMenus 4 - default styles - do not edit */
+.clCMEvent{position:absolute; width:99%; height:99%; 
+           clip:rect(0,100%,100%,0); left:0; top:0;}
+.clCMAbs{position:absolute; visibility:hidden; left:0; top:0}
+/* CoolMenus 4 - default styles - end */
+.clBar {
+    position: absolute; 
+    width: 100%; 
+    height: 100px; 
+    color: black;
+    margin-right: auto;
+    margin-left: auto;
+    visibility: hidden;
+	
+}
+
+.cmMenu{
+    position: absolute; 
+    font-family: Arial, Helvetica, San-serif;
+    background-color: transparent; 
+
+    color: #ffffff; 
+    padding: 2px; 
+    font-weight: bold;
+}
+
+.cmItem {
+    position: absolute; 
+    font-family: Arial, Helvetica, San-serif;
+    background-color: transparent; 
+
+    color: #05ABE9; 
+    padding: 2px; 
+    font-weight: bold;
+}
+
+.cmMenu, .cmMenuOver {
+    text-align: center;
+    font-size: 14px;
+	
+}
+
+.cmMenuOver, .cmItemOver {  
+    font-family: Arial, Helvetica, San-serif;
+    position: absolute; 
+    background: transparent;
+    padding: 3px; 
+    font-weight: bold;
+    cursor: pointer; 
+    cursor: hand; /* IE 5.5 non-compliant workaround */ 
+	background:bottom left url("http://localhost:8088/FlowBuilder/images/bg_right_title_green.jpg") repeat-x;
+	
+}
+
+.cmMenuBorder, .cmItemBorder {
+    position: absolute; 
+    visibility: hidden; 
+}
+
+.cmItem, .cmItemOver {
+    background-color: #ccc; 
+    color: #fcfcfc; 
+    text-align: left;
+}
+
+.cmItemOver {
+    background-color: #c0c0c0; 
+    color: #05ABE9; 
+}
+ 
+.cmItem, .cmItemOver {
+    font-size: 12px;
+}
+
+.cmItemBorder {
+}
+
+.menuArrows {
+    vertical-align: middle;
+    margin-left: 0px;
+}

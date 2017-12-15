@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Main-Class: org.apache.xalan.xslt.Process
+Sealed: true
+Created-By: Ant 1.4
+Class-Path: jaxp.jar crimson.jar
+
+Name: org/apache/xalan/xslt/
+Specification-Title: Java API for XML Processing
+Specification-Vendor: Sun Microsystems Inc.
+Implementation-Vendor: Apache Software Foundation
+Specification-Version: 1.1
+Implementation-Version: 2.1.0
+Implementation-Title: org.apache.xalan.xslt
+

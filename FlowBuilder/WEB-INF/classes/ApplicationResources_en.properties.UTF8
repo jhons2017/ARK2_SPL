@@ -1,0 +1,152 @@
+# =================================================================
+# NO.83XXXXXX
+#
+# SYMBOL NAME ApplicationResources_ja ; ITEM = 001 ; REV = 00 ; DATE '04/10/08
+#
+# FUNCTION
+# This property file is used for create a PropertyResourceBundle
+# It contains Locale specific strings used in the Yamatake Project.
+#
+# (c) 2004 Yamatake Corporation  All Rights Reserved
+#
+# ORIGINAL SOURCE INFORMATION
+#
+# REVISION HISTORY
+#			REV.00 '04/10/08 BY. T.Okuyama (BSC)
+# ==================================================================
+
+#---- Menu ----#
+Menu.Title.Entrance=Entrance
+Menu.Title.BusinessContact=BusinessContact
+Menu.Title.TransferContactList=TransferContactList
+Menu.Title.CustomerContactList=CustomerContactList
+Menu.Title.Schedule=Schedule
+Menu.Title.Calender=Calender
+Menu.Title.MonthlyWorkList=MonthlyWorkList
+Menu.Title.YearlyWorkList=YearlyWorkList
+Menu.Title.Man-hourOfWorkReport=Man-hourOfWorkReport
+Menu.Title.MasterWork=MasterWork
+Menu.Title.MasterWorkManage=MasterWorkManage
+Menu.Title.Trouble=Trouble
+Menu.Title.NewTrouble=NewTrouble
+Menu.Title.TroubleList=TroubleList
+Menu.Title.TroubleReport=TroubleReport
+Menu.Title.StockSupply=StockSupply
+Menu.Title.StockUpHistory=StockUpHistory
+Menu.Title.ShipStockHistory=ShipStockHistory
+Menu.Title.StockList=StockList
+Menu.Title.MonthlyStockReportOfSupplies=MonthlyStockReportOfSupplies
+Menu.Title.YearlyStockReportOfSupplies=YearlyStockReportOfSupplies
+Menu.Title.MonthlyStockReportOfShipReason=MonthlyStockReportOfShipReason
+Menu.Title.MultiYearlyStockReportOfShipReasonAndSupplies=MultiYearlyStockReportOfShipReasonAndSupplies
+Menu.Title.StockSupplyManage=StockSupplyManage
+Menu.Title.Equipment=Equipment
+Menu.Title.EquipmentRepairHistory=EquipmentRepairHistory
+Menu.Title.EquipmentList=EquipmentList
+Menu.Title.EquipmentRepairReport=EquipmentRepairReport
+Menu.Title.EquipmentRepairReportOfEquipmentKind=EquipmentRepairReportOfEquipmentKind
+Menu.Title.EquipmentRepairReportOfRepairPoint=EquipmentRepairReportOfRepairPoint
+Menu.Title.EquipmentListManage=EquipmentListManage
+Menu.Title.AddressBook=AddressBook
+Menu.Title.AddressList=AddressList
+Menu.Title.AddressBookManage=AddressBookManage
+Menu.Title.Report=Report
+Menu.Title.FileOutput=FileOutput
+Menu.Title.BusinessLogFormatSetting=BusinessLogFormatSetting
+Menu.Title.BusinessLogPointCodeSetting=BusinessLogPointCodeSetting
+Menu.Title.BuildingConfigration=BuildingConfigration
+Menu.Title.ManagementDivisionSetting=ManagementDivisionSetting
+Menu.Title.WorkerSetting=WorkerSetting
+Menu.Title.WorkGroupSetting=WorkGroupSetting
+Menu.Title.StockKindSetting=StockKindSetting
+Menu.Title.StockRepositorySetting=StockRepositorySetting
+Menu.Title.ShipStockReasonSetting=ShipStockReasonSetting
+Menu.Title.CalenderSetting=CalenderSetting
+Menu.Title.SystemConfiguration=SystemConfiguration
+Menu.Title.BuildingSetting=BuildingSetting
+Menu.Title.ManagementGroupSetting=ManagementGroupSetting
+Menu.Title.BuilSetting=BuilSetting
+Menu.Title.SystemDataSetting=SystemDataSetting
+Menu.Title.UserManage=UserManage
+Menu.Title.Support=Support
+
+# Struts—p
+# -- standard errors --
+errors.header=<UL>
+errors.prefix=<LI>
+errors.suffix=</LI>
+errors.footer=</UL>
+# -- validator --
+errors.invalid={0} is invalid.
+errors.maxlength={0} can not be greater than {1} characters.
+errors.minlength={0} can not be less than {1} characters.
+errors.range={0} is not in the range {1} through {2}.
+errors.required={0} is required.
+errors.byte={0} must be an byte.
+errors.date={0} is not a date.
+errors.double={0} must be an double.
+errors.float={0} must be an float.
+errors.integer={0} must be an integer.
+errors.long={0} must be an long.
+errors.short={0} must be an short.
+errors.creditcard={0} is not a valid credit card number.
+errors.email={0} is an invalid e-mail address.
+# -- other --
+errors.cancel=Operation cancelled.
+errors.detail={0}
+errors.general=The process did not complete. Details should follow.
+errors.token=Request could not be completed. Operation is not in sequence.
+# -- welcome --
+welcome.title=Struts Blank Application
+welcome.heading=Welcome!
+welcome.message=To get started on your own application, copy the struts-blank.war to a new WAR file using the name for your application. Place it in your container's "webapp" folder (or equivalent), and let your container auto-deploy the application. Edit the skeleton configuration files as needed, restart your container, and you are on your way! (You can find the application.properties file with this message in the /WEB-INF/src/java/resources folder.)
+
+#------Common -------#
+Common.button.Cancel=Cancel
+Common.button.Display=Show
+Common.button.Execute=OK
+Common.button.Send=Transmit
+Common.count.PageNum=20
+Common.label.NextLink=piece of records
+Common.label.NextPage=the next 
+Common.label.PageAll=,the present is 
+Common.label.PageEnd=page)
+Common.label.PageFrom=-
+Common.label.PageSeparator=/
+Common.label.PageStart=(
+Common.label.PageTo=piece of records
+Common.label.PageBefore=the total number is 
+Common.label.PrevPage=the previous 
+Common.label.Separate=|
+Common.label.PageBefore=
+Common.label.Colon=\uff1a
+Common.label.Dot=.
+Common.button.BackSpace=BS
+Common.label.C1=1
+Common.label.C2=2
+Common.label.C3=3
+Common.label.C4=4
+Common.label.C5=5
+Common.label.C6=6
+Common.label.C7=7
+Common.label.C8=8
+Common.label.C9=9
+Common.label.C0=0
+Common.label.BackSpace=BS
+Common.label.Minus=-
+
+#------titles of incorrect forms
+Common.title.ErrorTitle=schedule error
+
+#------error messages
+errors.AccessNotPermit=Don't permit accessing.
+errors.SendNG=The message was not transmitted successfully.(the module information dosen't exist)
+errors.LineIsBusy=The network information service is too busy.Please wait a minute and try again.
+errors.NoItem=There is not a selected item presently.
+errors.NoModuleProgramNo=Specified Module No or Program No is not found.
+errors.ReadErr=The getting data operation was failed.
+errors.WriteErr=The operation of writing data was failed.
+errors.DataNone=The login information doesn't exist.
+errors.SetValueErr=The setting value is not correct.
+errors.NotInstall=Function is not installed
+

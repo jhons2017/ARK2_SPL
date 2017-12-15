@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emails title="無錫華夏業務改善システム自動発送メール">
+	<email id="0001">
+		<content state="マネージャ承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="グループ長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="部長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="SI事業部長承认" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="開通状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件はもう開通しました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="中止状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件がもう閉じました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+	</email>
+	<email id="0002">
+		<content state="部長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="SI事業部長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="開通状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件はもう開通しました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="中止状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件がもう閉じました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+	</email>
+	<email id="0003">
+		<content state="回覧中" cc="" people="1">
+			こんにちは、無錫華夏業務改善システムで回覧する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="回覧済" cc="xuxm@wxhx.com" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件はもう回覧済しました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="中止状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件がもう閉じました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+	</email>
+	<email id="0004">
+		<content state="部長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="総務部長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="開通状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件はもう開通しました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="中止状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件がもう閉じました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+	</email>
+	<email id="0005">
+		<content state="部長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="総経理室長承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="各部門長回覧中" cc="" people="1">
+			こんにちは、無錫華夏業務改善システムで回覧する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="総経理承認" cc="" people="0">
+			こんにちは、無錫華夏業務改善システムで承認する案件がありますが、速めにシステムを登録して操作するようお願いします。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="開通状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件はもう開通しました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+		<content state="中止状態" cc="" people="2">
+			{DrafterName}、こんにちは、無錫華夏業務改善システムで申し込んだ案件がもう閉じました。
+			
+			案件種類：{jobType}
+			案件名：{jobName}
+			現在案件状態：{curState}
+			
+			無錫華夏業務改善システム:http://172.16.1.18:8080/FlowBuilder
+		</content>
+	</email>
+</emails>

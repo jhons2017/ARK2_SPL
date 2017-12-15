@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="java"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-validator.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jakarta-oro.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/struts.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/struts-menu-2.3.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/job_01537.zip"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-digester.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/junit-4.3.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/poi-3.0-rc4-20070503.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/poi-contrib-3.0-rc4-20070503.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/poi-scratchpad-3.0-rc4-20070503.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jug-asl-2.0.0.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="D:/Tomcat5.0/common/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/Tomcat5.0/common/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="D:/Tomcat5.0/webapps/FlowBuilder/WEB-INF/lib/commons-fileupload-1.2.jar"/>
+	<classpathentry kind="output" path="WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <!--appender name="CONSOL" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%t] %-5p (%F:%L) - %m\n"/>
+        </layout>
+    </appender-->
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="D:/Tomcat5.0/webapps/FlowBuilder/data/logs/FlowBuilder.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <param name="ImmediateFlush" value="true"/>
+        <param name="MaxFileSize" value="10KB"/>
+        <param name="MaxBackupIndex" value="3"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!--param name="ConversionPattern" value="%d [%t] %-5p (%F:%L) - %m%n"/-->
+            <param name="ConversionPattern" value="%d [%t] %-5p (%l) - %m%n"/>
+        </layout>
+    </appender>
+
+    <root>
+        <!--priority value ="debug"/-->
+        <priority value ="FATAL"/>
+        <!--<appender-ref ref="CONSOL"/>-->
+        <!--appender-ref ref="FILE"/-->
+    </root>
+
+</log4j:configuration>

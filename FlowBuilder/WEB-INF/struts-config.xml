@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<!--
+ * =================================================================
+ * NO.83XXXXXX
+ * ITEM = 001 ; REV = 01 ; DATE 2006/03/29
+ *
+ * (c) 2007 WXHX Corporation  All Rights Reserved.
+ * 
+ * ORIGINAL SOURCE INFORMATION
+ * 
+ * REVISION HISTORY
+ *			REV.00 2007/06/25 BY. XUXM (WXHX)
+ *			
+ * =================================================================
+-->
+<!--
+ これは、FlowBuilder:社内業務改善システムのStruts configurationファイルです。
+-->
+<struts-config>
+
+<!-- ======================================== Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="LoginForm" 
+			type="flowbuilder.presentation.login.LoginForm"/>
+		<form-bean name="OrgSelectForm" 
+			type="flowbuilder.presentation.orglist.OrgSelectForm"/>
+		<form-bean name="JobListForm" 
+			type="flowbuilder.presentation.joblist.JobListForm"/>
+		<form-bean name="JobMakeForm" 
+			type="flowbuilder.presentation.jobshow.JobMakeForm"/>
+		<form-bean name="JobDetailForm" 
+			type="flowbuilder.presentation.jobctrl.JobDetailForm"/>
+		<form-bean name="PasswordForm"
+			type="flowbuilder.presentation.user.PasswordForm"/>
+		<form-bean name="PrintForm"
+			type="flowbuilder.presentation.webcmn.taglibs.presentation.print.JobPrintForm"/>	
+		<form-bean name="CircularForm"
+			type="flowbuilder.presentation.webcmn.taglibs.presentation.circular.CircularForm"/>		
+	</form-beans>
+	
+<!-- ================================= Global Exception Definitions -->
+    <global-exceptions>
+		<!-- アプリケーション例外 -->
+		<!-- 転送先は、path属性は設定しないので、AppExceptionが発生したActionのinput属性になる。 -->
+		<exception
+			key=""
+			handler="fbcom.framework.struts.BscExceptionHandler"
+			type="fbcom.framework.exceptions.AppException"/>
+
+    </global-exceptions>
+
+<!-- =================================== Global Forward Definitions -->
+    <global-forwards>
+        <forward name="welcome" path="/do/flowbuilder/Welcome"/>
+		<forward name="logout" path="/do/flowbuilder/Logout"/>
+		
+	</global-forwards>
+    
+<!-- =================================== Action Mapping Definitions -->
+    <action-mappings>
+  		<!-- よこそう -->
+  		<action    path="/flowbuilder/Welcome"
+			type="flowbuilder.presentation.login.WelcomeAction">
+			<forward name="success" path="/WEB-INF/jsp/flowbuilder/logon/logon.jsp"/>
+		</action>
+						
+    	<!-- ログアウト -->
+		<action    path="/flowbuilder/Logout"
+			type="flowbuilder.presentation.login.LogoutAction">
+			<forward name="success" path="/"/>
+		</action>
+				
+  		<!-- ログイン -->
+		<action    path="/flowbuilder/Login"
+			type="flowbuilder.presentation.login.LoginAction"
+		    name="LoginForm"
+			input="/do/flowbuilder/Welcome"
+			validate="false">
+			<forward name="success" path="/do/flowbuilder/OrgSelect" redirect="true"/>
+		</action>
+		
+  		<!-- ログイン -->
+		<action    path="/flowbuilder/OrgSelect"
+			type="flowbuilder.presentation.orglist.OrgSelectAction"
+		    name="OrgSelectForm"
+			input="/WEB-INF/jsp/flowbuilder/logon/logon.jsp"
+			scope="request"
+			validate="false">
+			<forward name="success" path="/WEB-INF/jsp/flowbuilder/orglist/orglist.jsp"/>
+		</action>
+				
+  		<!-- 案件一覧 -->
+		<action    path="/flowbuilder/JobList"
+			type="flowbuilder.presentation.joblist.JobListAction"
+			name="JobListForm"
+			scope="request"
+			parameter="method"
+			validate="false">
+			<forward name="success" path="/WEB-INF/jsp/flowbuilder/joblist/joblist.jsp"/>
+		</action>
+		
+		<!-- Frame TOP -->
+		<action    path="/flowbuilder/Top"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/jsp/flowbuilder/main/Admin_Index_Top.jsp"/>
+		
+		<!-- Frame LEFT -->
+		<action    path="/flowbuilder/Left"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/jsp/flowbuilder/main/Admin_Index_Left.jsp"/>
+
+		
+		<!-- Frame Main -->
+		<action    path="/flowbuilder/Main"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/jsp/flowbuilder/main/Admin_Index_Main.jsp"/>
+					
+  		<!-- 案件新規画面初期表示 -->
+		<action    path="/flowbuilder/JobCreateView"
+			type="flowbuilder.presentation.jobshow.JobMakeAction"
+			name="JobMakeForm"
+			parameter="method"
+			scope="request"
+			validate="false">
+			<forward name="success" path=""/>
+		</action>
+				
+  		<!-- 案件表示 -->
+		<action    path="/flowbuilder/JobShow"
+			type="flowbuilder.presentation.jobshow.JobMakeAction"
+			name="JobMakeForm"
+			parameter="method"
+			scope="request"
+			validate="false">
+			<forward name="success" path=""/>
+		</action>
+				
+  		<!-- 案件作成 -->
+		<action    path="/flowbuilder/JobControl"
+			type="flowbuilder.presentation.jobctrl.JobControlAction"
+			name="JobDetailForm"
+			scope="request"
+			validate="false">
+			<forward name="success" path="/do/flowbuilder/JobList?method=jobDetail"/>
+		</action>
+				
+		<!-- パスワード変更 -->
+		<action    path="/flowbuilder/PasswordUpdate"
+			type="flowbuilder.presentation.user.PasswordUpdateAction"
+		    name="PasswordForm"
+		    scope="request"
+		    parameter="method"
+			input="/WEB-INF/jsp/flowbuilder/usermanage/pwdupdate.jsp"
+			validate="false">
+			<forward name="success" path="/WEB-INF/jsp/flowbuilder/usermanage/pwdupdate.jsp"/>
+		</action>
+		
+		<!-- print -->
+		<action    path="/flowbuilder/JobPrint"
+			type="flowbuilder.presentation.webcmn.taglibs.presentation.print.JobPrintAction"
+		    name="PrintForm"
+		    scope="request"
+		    parameter="method"
+			validate="false">
+			<forward name="success" path=""/>
+		</action>	
+		
+		<!-- 回覧部品操作 -->
+		<action    path="/flowbuilder/CircularOperate"
+			type="flowbuilder.presentation.webcmn.taglibs.presentation.circular.CircularAction"
+			name="CircularForm"
+			scope="request"
+			parameter="method"
+			validate="false">
+			<forward name="success" path="/WEB-INF/jsp/common/circular.jsp"/>
+		</action>
+    </action-mappings>
+
+<!-- ===================================== Controller Configuration -->
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+<!-- ================================ Message Resources Definitions -->
+    <message-resources parameter="ApplicationResources"/>
+<!-- ======================================= Plug Ins Configuration -->
+  <!-- ========== Tiles plugin ===================  -->
+  <!--												-->
+  <!--
+     This plugin initialize Tiles definition factory. This later can takes some
+	 parameters explained here after. The plugin first read parameters from web.xml, then
+	 overload them with parameters defined here. All parameters are optional.
+	 The plugin should be declared in each struts-config file.
+       - definitions-config: (optional) 
+            Specify configuration file names. There can be several comma 
+		    separated file names (default: ?? )
+       - moduleAware: (optional - struts1.1) 
+            Specify if the Tiles definition factory is module aware. If true (default), 
+			there will be one factory for each Struts module. 
+			If false, there will be one common factory for all module. In this later case, 
+			it is still needed to declare one plugin per module. The factory will be 
+			initialized with parameters found in the first initialized plugin (generally the
+			one associated with the default module).
+			  true : One factory per module. (default)
+			  false : one single shared factory for all modules
+	   - definitions-parser-validate: (optional)
+	        Specify if xml parser should validate the Tiles configuration file.
+			  true : validate. DTD should be specified in file header. (default)
+			  false : no validation
+			  
+	  Paths found in Tiles definitions are relative to the main context.
+  -->
+  <!-- comment following if struts1.0.x -->
+  <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+    <set-property property="definitions-config" 
+	                 value="/WEB-INF/tiles-defs.xml" />
+    <set-property property="moduleAware" value="true" />
+    <set-property property="definitions-parser-validate" value="true" />
+  </plug-in>
+
+  <!-- end comment if struts1.0.x -->
+
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property
+        property="pathnames"
+        value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml,/WEB-INF/validator-rules-bsc.xml"/>
+  </plug-in>
+
+  <!-- ========== Struts-menu plugin ===================  -->
+  <plug-in className="net.sf.navigator.menu.MenuPlugIn">
+    <set-property property="menuConfig" value="/WEB-INF/menu-config.xml"/>
+  </plug-in>
+  
+  <!-- ========== アプリケーションの初期化が行う plugin ===================  -->
+  <plug-in className="flowbuilder.presentation.webcmn.AppInitializer"/>
+
+</struts-config>
+

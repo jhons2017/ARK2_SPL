@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<!--
+ * ==================================================================
+ * NO.83XXXXXX
+ *
+ * ITEM = 001 ; REV = 00 ; DATE '06/06/30
+ *
+ * (c) 2006 WuXiHuaXia Corporation  All Rights Reserved
+ *
+ * ORIGINAL SOURCE INFORMATION
+ *
+ * REVISION HISTORY
+ *			REV.00 '06/06/30 BY. Dong Hongwei (WXHX)
+ * ==================================================================
+-->
+<!--
+ Tilesの設定ファイル。
+ レイアウトのデフォルト値を定義する。
+-->
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+
+    <!-- sample tiles definitions
+    <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
+        <put name="title"  value="Sample Page Title" />
+        <put name="header" value="/common/header.jsp" />
+        <put name="menu"   value=".mainMenu" />
+        <put name="footer" value="/common/footer.jsp" />
+        <put name="body"   value=".portal.body" />
+    </definition>
+
+    <definition name=".mainMenu" path="/common/layouts/vboxLayout.jsp" >
+        <putList name="list" >
+            <add value=".menu.links" />
+            <add value=".menu.taglib.references" />
+            <add value=".menu.printer.friendly" />
+            <add value=".menu.old.documents" />
+      </putList>
+    </definition>
+
+    <definition name="aPage" extends=".mainLayout">
+        <put name="title"  value="Another Title" />
+        <put name="body"   value=".aPage.body" />
+    </definition>
+
+    end samples -->
+
+	<!-- FlowBuilderのデフォルト -->
+	<definition name="flowbuilder.default" path="/WEB-INF/jsp/layouts/flowbuilderDefaultLayout.jsp">
+		<put name="css" value="/WEB-INF/jsp/common/coolMenu4css.jsp"/>
+		<put name="script" value="/WEB-INF/jsp/common/coolMenu4Script.jsp"/>
+		<put name="header" value="/WEB-INF/jsp/common/header.jsp"/>
+		<put name="menu" value="/WEB-INF/jsp/common/coolMenu4.jsp"/>
+	</definition>
+	
+	<!-- FlowBuilderのデフォルト -->
+	<definition name="flowbuilder.defaultBefore" path="/WEB-INF/jsp/layouts/flowbuilderDefaultLayout.jsp">
+		<put name="css" value="/WEB-INF/jsp/common/coolMenu4css.jsp"/>
+		<put name="script" value="/WEB-INF/jsp/common/coolMenu4Script.jsp"/>
+		<put name="header" value="/WEB-INF/jsp/common/header.jsp"/>
+		<put name="menu" value="/WEB-INF/jsp/common/coolMenu4OrgSelect.jsp"/>
+	</definition>
+	
+</tiles-definitions>

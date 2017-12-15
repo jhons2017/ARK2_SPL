@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="shift_jis"?>
+<print>
+	<tyouhyouName id = "設備申請" URL = "D:\Tomcat 5.0\webapps\FlowBuilder\data\template\print\enquipment.xls">
+		<fixeditem>
+			<item id = "1">
+			<id>user</id>
+			<row>3</row>
+			<col>3</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "2">
+			<id>ID</id>
+			<row>3</row>
+			<col>5</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "3">
+			<id>IP</id>
+			<row>3</row>
+			<col>7</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "4">
+			<id>fb_JobName</id>
+			<row>5</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "5">
+			<id>department</id>
+			<row>6</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "6">
+			<id>roleSelect</id>
+			<row>7</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "7">
+			<id>equimentName</id>
+			<row>8</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "8">
+			<id>number</id>
+			<row>9</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "9">
+			<id>usage</id>
+			<row>10</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "10">
+			<id>config</id>
+			<row>11</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "11">
+			<id>applyDate</id>
+			<row>12</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "12">
+			<id>select</id>
+			<row>13</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "13">
+			<id>buchouComment</id>
+			<row>14</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "14">
+			<id>SIComment</id>
+			<row>15</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "15">
+			<id>ConfirmRoute</id>
+			<row>17</row>
+			<col>6</col>
+			<sheet>0</sheet>
+			</item>
+		</fixeditem>
+	</tyouhyouName>	
+	
+	<tyouhyouName id = "セキュリティ申込書" URL = "D:\Tomcat 5.0\webapps\FlowBuilder\data\template\print\security.xls">
+		<fixeditem>
+			<item id = "1">
+			<id>user</id>
+			<row>3</row>
+			<col>3</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "2">
+			<id>ID</id>
+			<row>3</row>
+			<col>5</col>
+			<sheet>0</sheet>			
+			</item>
+			<item id = "3">
+			<id>IP</id>
+			<row>3</row>
+			<col>7</col>
+			<sheet>0</sheet>			
+			</item>
+			<item id = "4">
+			<id>fb_JobName</id>
+			<row>5</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "5">
+			<id>projectGroup</id>
+			<row>6</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "6">
+			<id>jobSelectPM</id>
+			<row>7</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "7">
+			<id>startdate</id>
+			<row>8</row>
+			<col>2</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "8">
+			<id>enddate</id>
+			<row>8</row>
+			<col>5</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "9">
+			<id>anyAddress</id>
+			<row>9</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "10">
+			<id>address</id>
+			<row>10</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "11">
+			<id>port</id>
+			<row>11</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "12">
+			<id>email</id>
+			<row>12</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "13">
+			<id>MSN,USB,CAMARO,SKYPE,CDROM,FD,HD</id>
+			<row>0</row>
+			<col>0</col>
+			<sheet>1</sheet>
+			</item>
+			<item id = "14">
+			<id>otherRequest</id>
+			<row>13</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "15">
+			<id>comment</id>
+			<row>15</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "16">
+			<id>select</id>
+			<row>16</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "17">
+			<id>proManageChouComment</id>
+			<row>17</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "18">
+			<id>groupChouComment</id>
+			<row>18</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "19">
+			<id>buchouComment</id>
+			<row>19</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "20">
+			<id>SIComment</id>
+			<row>20</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "21">
+			<id>ConfirmRoute</id>
+			<row>22</row>
+			<col>7</col>
+			<sheet>0</sheet>
+			</item>
+		</fixeditem>
+	</tyouhyouName>	
+	
+	<tyouhyouName id = "回覧票" URL = "D:\Tomcat 5.0\webapps\FlowBuilder\data\template\print\huilan.xls">
+		<fixeditem>
+			<item id = "1">
+			<id>user</id>
+			<row>2</row>
+			<col>4</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "2">
+			<id>ID</id>
+			<row>2</row>
+			<col>6</col>
+			<sheet>0</sheet>			
+			</item>
+			<item id = "3">
+			<id>IP</id>
+			<row>2</row>
+			<col>8</col>
+			<sheet>0</sheet>			
+			</item>
+			<item id = "4">
+			<id>fb_JobName</id>
+			<row>3</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "5">
+			<id>comment</id>
+			<row>4</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "6">
+			<id>startdate</id>
+			<row>5</row>
+			<col>2</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "7">
+			<id>enddate</id>
+			<row>5</row>
+			<col>5</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "8">
+			<id>Circular</id>
+			<row>11</row>
+			<col>0</col>
+			<sheet>0</sheet>
+			</item>
+		</fixeditem>
+	</tyouhyouName>	
+	
+	<tyouhyouName id = "休假申請"  URL = "D:\Tomcat 5.0\webapps\FlowBuilder\data\template\print\rest.xls">
+		<fixeditem>
+			<item id = "1">
+			<id>user</id>
+			<row>3</row>
+			<col>3</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "2">
+			<id>ID</id>
+			<row>3</row>
+			<col>5</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "3">
+			<id>IP</id>
+			<row>3</row>
+			<col>7</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "4">
+			<id>fb_JobName</id>
+			<row>5</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "5">
+			<id>projectGroup</id>
+			<row>6</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "6">
+			<id>roleSelect</id>
+			<row>7</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "7">
+			<id>startdate</id>
+			<row>8</row>
+			<col>2</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "8">
+			<id>enddate</id>
+			<row>8</row>
+			<col>5</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "9">
+			<id>restType</id>
+			<row>9</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "10">
+			<id>reason</id>
+			<row>10</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "11">
+			<id>select</id>
+			<row>11</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "12">
+			<id>buchouComment</id>
+			<row>12</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "13">
+			<id>SIComment</id>
+			<row>13</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "14">
+			<id>ConfirmRoute</id>
+			<row>15</row>
+			<col>8</col>
+			<sheet>0</sheet>
+			</item>
+		</fixeditem>
+	</tyouhyouName>
+
+	<tyouhyouName id = "出張申請" URL = "D:\Tomcat 5.0\webapps\FlowBuilder\data\template\print\syuqyou.xls">
+		<fixeditem>
+			<item id = "1">
+			<id>user</id>
+			<row>3</row>
+			<col>3</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "2">
+			<id>ID</id>
+			<row>3</row>
+			<col>5</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "3">
+			<id>IP</id>
+			<row>3</row>
+			<col>7</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "4">
+			<id>fb_JobName</id>
+			<row>5</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "5">
+			<id>department</id>
+			<row>6</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "6">
+			<id>objectAdress</id>
+			<row>7</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "7">
+			<id>trafficTool</id>
+			<row>8</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "8">
+			<id>startdate</id>
+			<row>9</row>
+			<col>2</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "9">
+			<id>enddate</id>
+			<row>9</row>
+			<col>6</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "10">
+			<id>dutyer</id>
+			<row>10</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "11">
+			<id>contract</id>
+			<row>11</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "12">
+			<id>applyReason</id>
+			<row>12</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "13">
+			<id>recommendationReason</id>
+			<row>13</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "14">
+			<id>recommendationer</id>
+			<row>14</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "15">
+			<id>recommendationDate</id>
+			<row>15</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "16">
+			<id>buchouComment</id>
+			<row>16</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "17">
+			<id>shiTuChouComment</id>
+			<row>17</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "18">
+			<id>ManagerComment</id>
+			<row>18</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>			
+			<item id = "19">
+			<id>ConfirmRoute</id>
+			<row>20</row>
+			<col>8</col>
+			<sheet>0</sheet>
+			</item>
+		</fixeditem>
+	</tyouhyouName>
+	<zanngyou id = "残業申請" URL = "D:\Tomcat 5.0\webapps\FlowBuilder\data\template\print\zanngyou.xls">
+		<fixeditem>
+			<item id = "1">
+			<id>user</id>
+			<row>3</row>
+			<col>3</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "2">
+			<id>ID</id>
+			<row>3</row>
+			<col>5</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "3">
+			<id>IP</id>
+			<row>3</row>
+			<col>7</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "4">
+			<id>fb_JobName</id>
+			<row>5</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "5">
+			<id>department</id>
+			<row>6</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "6">
+			<id>objectAdress</id>
+			<row>7</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "7">
+			<id>trafficTool</id>
+			<row>8</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "8">
+			<id>startdate</id>
+			<row>9</row>
+			<col>2</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "9">
+			<id>enddate</id>
+			<row>9</row>
+			<col>6</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "10">
+			<id>dutyer</id>
+			<row>10</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "11">
+			<id>contract</id>
+			<row>11</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "12">
+			<id>applyReason</id>
+			<row>12</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "13">
+			<id>recommendationReason</id>
+			<row>13</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "14">
+			<id>recommendationer</id>
+			<row>14</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "15">
+			<id>recommendationDate</id>
+			<row>15</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "16">
+			<id>buchouComment</id>
+			<row>16</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "17">
+			<id>shiTuChouComment</id>
+			<row>17</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>
+			<item id = "18">
+			<id>ManagerComment</id>
+			<row>18</row>
+			<col>1</col>
+			<sheet>0</sheet>
+			</item>			
+			<item id = "19">
+			<id>ConfirmRoute</id>
+			<row>20</row>
+			<col>8</col>
+			<sheet>0</sheet>
+			</item>
+		</fixeditem>
+	</zanngyou>
+</print>

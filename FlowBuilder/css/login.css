@@ -1,0 +1,297 @@
+/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  SuSKE Login CSS
+    REV.00 '04/09/07 BY. M.Okano (YES)
+    REV.02 '05/08/09 BY. T.Okuyama (BSC)
+    	Struts-ActionMessage用のスタイルを追加。
+    REV.03 '05/08/11 BY. T.Okuyama (BSC)
+    	メモエリアの追加。
+    	解像度1024 X 768に収まるようにサイズを調整。
+  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+/*------------------------------------*/
+/* HTML,BODYタグ 					  */
+/*------------------------------------*/
+HTML, BODY{
+	background-color	: #ffffff;
+	color				: #4c4c4c;
+	font-size			: small;
+	font-family			: 'ＭＳ ゴシック', sans-serif;
+}
+
+/*------------------------------------*/
+/* ヘッダエリア 					  */
+/*------------------------------------*/
+.header{
+/*border	: 1px solid orange;*/
+	position			: absolute;
+	top					: 200px;
+	left				: 200px;
+	width				: 700px;
+	white-space			: nowrap;
+}
+/*------------------------------------*/
+/* タイトル画像１ 					  */
+.header .obj1{
+	position			: absolute;
+	top					: 0px;
+	left				: 20px;
+	background-image	: url(obj_graphic_1.gif);
+	background-repeat	: no-repeat;
+	width				: 96px;
+	height				: 127px;
+}
+/* タイトル画像２ 					  */
+.header .obj2{
+	position			: absolute;
+	top					: 0px;
+	left				: 100px;
+	margin				: 0px;
+	padding				: 0px;
+	background-image	: url(obj_sitetitle_FlowBuilder.gif);
+	background-repeat	: no-repeat;
+	width				: 1024px;
+	height				: 200px;
+}
+/* タイトル画像３ 					  */
+.header .obj3{
+	position			: absolute;
+	top					: 0px;
+	left				: 356px;
+	margin				: 0px;
+	padding				: 0px;
+	background-image	: url(obj_graphic_2.gif);
+	background-repeat	: no-repeat;
+	width				: 364px;
+	height				: 127px;
+}
+
+
+/*------------------------------------*/
+/* メインエリア 					  */
+/*------------------------------------*/
+.main{
+/*border	: 1px solid blue;*/
+	position			: absolute;
+	top					: 360px;
+	left				: 250px;
+	width				: 700px;
+	white-space			: nowrap;
+	height				: 370px;
+	background-image	: url(bg_login.gif);
+	background-repeat	: repeat;
+	border-bottom		: 1px solid #D4D4D4;
+	border-right		: 1px solid #D4D4D4;
+}
+
+
+/*------------------------------------*/
+/* 【main】お知らせエリア 			  */
+/*------------------------------------*/
+.information{
+/*border	: 1px solid yellow;*/
+	position			: absolute;
+	top					: 0px;
+	left				: 250px;
+	display				: inline;
+	margin				: 0px;
+	width				: 450px;
+	height				: 370px;
+	background-color	: Silver;
+	border-left			: 1px solid  #d4d4d4;
+}
+/* 【information】お知らせ情報テーブル */
+.info_tbl {
+	border-collapse		: collapse;
+}
+/* 【information】お知らせ情報テーブルタイトルTH */
+.info_tbl TH{
+	margin				: 0px;
+	padding				: 0px 0px 0px 5px;
+	background-image	: url(bg_base.gif);
+	background-repeat	: repeat-x;
+	text-align			: left;
+	font-size			: 95%;
+	font-weight			: bold;
+	font-family			: 'Arial TUR';
+}
+/* 【information】お知らせ情報テーブルTD */
+.info_tbl TD{
+}
+/* 【information】お知らせ情報テーブル日付TD */
+.info_tbl TD.date{
+	vertical-align		: top;
+}
+
+/* 【information】お知らせ情報テーブルタイトルTD */
+.info_tbl TD.title{
+	font-size			: 90%;
+	font-weight			: bold;
+	padding				: 5px 0px 5px 0px;
+}
+
+/* 【information】お知らせ情報テーブル内容TD */
+.info_tbl TD.detail{
+	font-size			: 90%;
+	/*border-bottom		: 1px dotted #c3c3c3;*/
+	padding				: 5px 0px 10px 0px;
+}
+
+/* 【information】お知らせ情報テーブル掲載期間TD */
+.info_tbl TD.term{
+	font-size			: 75%;
+}
+
+/* 【information】お知らせ情報テーブル発行日TD */
+.info_tbl TD.date{
+	font-size			: 75%;
+}
+
+/* 【information】お知らせ情報テーブル発行者TD */
+.info_tbl TD.publisher{
+	border-bottom		: 1px dotted #c3c3c3;
+	font-size			: 75%;
+}
+
+
+/*------------------------------------*/
+/* 【main】ログインエリア 			  */
+/*------------------------------------*/
+.login{
+/*border	: 1px solid green;*/
+	position			: absolute;
+	top					: 0px;
+	left				: 0px;
+	display				: inline;
+	width				: 250px;
+	vertical-align		: top;
+	border-left			: 1px solid #D4D4D4;
+	border-right		: 1px solid #D4D4D4;
+}
+/* 【login】ログインテーブル */
+.login_tbl {
+	border-collapse		: collapse;
+	width				: 100%;
+}
+/* 【login】ログインテーブルTH */
+.login_tbl TH{
+	margin				: 0px;
+	padding				: 0px 0px 0px 5px;
+	background-image	: url(bg_base.gif);
+	background-repeat	: repeat-x;
+	text-align			: left;
+	font-size			: 95%;
+	font-weight			: bold;
+	font-family			: 'Arial TUR';
+}
+/* 【login】ログインテーブルTD */
+.login_tbl TD{
+	padding				: 10px 5px 10px 5px;
+	font-size			: 90%;
+	background-image	: none;
+	background-color	: white;
+}
+/* 【information】ログインテーブル：ログインラベルTD */
+.login_tbl TD.loginlbl{
+	font-size			: 85%;
+	font-weight			: bold;
+	text-align			: right;
+	white-space			: nowrap;
+}
+/*　ログインボタン左端GIF			　*/
+.login_tbl TD.loginLeft{
+	background-position	: right;
+	margin				: 0px;
+	padding				: 5px;
+	background-image	: url(login_left.gif);
+	background-repeat	: no-repeat;
+	width				: 19px;
+	height				: 40px;
+}
+
+/*　ログインボタン			　*/
+.login_tbl TD.login{
+	background-position	: center;
+	margin				: 0px;
+	padding				: 5px;
+	background-image	: url(login_left.gif);
+	background-repeat	: no-repeat;
+	width				: 100px;
+	height				: 40px;
+}
+
+
+/*　ログインボタン背景GIF			　*/
+.login_tbl TD.loginBg{
+	background-position	: left;
+	margin				: 0px;
+	padding				: 0px;
+	background-image	: url(login_bg.gif);
+	background-repeat	: repeat-x;
+	height				: 40px;
+	text-align			: center;
+	font-weight			: bold;
+	font-size			: 85%;
+
+}
+/*　ログインボタン右端GIF*/
+.login_tbl TD.loginRight{
+	background-position	: left;
+	margin				: 0px;
+	padding				: 0px;
+	background-image	: url(login_right.gif);
+	background-repeat	: no-repeat;
+	width				: 19px;
+	height				: 40px;
+}
+/*　ログインボタン：ハイパーリンク*/
+.login_tbl A.loginBtn{
+	color				: #191970;					/* MidinightBlue */
+	text-decoration		: none;
+/*	font-size			: small;*/
+}
+.login_tbl A.loginBtn:hover {
+	color				: #C71585;					/* MediumVioletRed */
+	position			: relative;
+	top					: 1px;
+	left				: 1px;
+}
+
+/*------------------------------------*/
+/* メモ　エリア 					  */
+/*------------------------------------*/
+.memo{
+	position			: absolute;
+	top					: 210px;
+	left				: 300px;
+	display				: inline;
+	width				: 500px;
+	vertical-align		: top;
+}
+
+/*------------------------------------*/
+/* フッタエリア 					  */
+/*------------------------------------*/
+.footer{
+/*border:1px solid red;*/
+	position			: absolute;
+	top					: 510px;
+	left				: 18px;
+	white-space			: nowrap;
+	width				: 706px;
+	padding				: 0px 0px 20px 0px;
+}
+
+/*  CopyRight						  */
+.copyright {
+	background-image	: url(obj_title_bar.gif);
+	background-repeat	: repeat-x;
+	letter-spacing		: 1px;
+	width				: 700px;
+	font-size			: 75%;
+	color				: #ffffff;
+	text-align			: right;
+}
+
+/* アクションメッセージ */
+.actionmessage{
+	color				: red;
+}

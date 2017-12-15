@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<roles>
+	<role1 name="総経理" id="1000">
+		<role2 name="室長" id="2500">
+			<role3 name="事業部長" id="2000">
+				<role4 name="部長" id="1500">
+					<role5 name="部長" id="1501">
+						<role6 name="部長" id="1502">
+							<role7 name="副部長" id="1510">
+								<role8 name="部長助理" id="1520">
+									<role9 name="高級マネージャ" id="1530">
+										<role10 name="グループ長" id="1540">
+											<role11 name="主任" id="1541">
+												<role12 name="マネージャ" id="1542">
+													<role13 name="秘書" id="1550">
+														<role14 name="社員" id="1543">
+														</role14>
+													</role13>
+												</role12>	
+											</role11>
+										</role10>
+									</role9>
+								</role8>	
+							</role7>
+						</role6>
+					</role5>
+				</role4>
+			</role3>
+		</role2>
+	</role1>
+	<role1 name="システム管理者" id="7000">
+	</role1>
+</roles>

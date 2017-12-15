@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<job>
+	<jobinfo cur_org="" cur_role="" cur_userid="" jobid="" name="" orgid="" roleid="" title="" userid="" userip="" date="" tempId=""/>
+	<WorkFlow>
+	　　<name>残業申請</name>
+	　　<step>
+	　　　　<state active="true" current="案件作成" title="作成"/>
+	　　　　<opr act="create" go_org="" go_role="" go_step="案件起案" id="create" name="作成" operator="作成者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="案件起案" title="起案待ち"/>
+	　　　　<opr act="save" go_org="" go_role="" go_step="案件起案" id="save" name="保存" operator="保存者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　　　<opr act="save" go_org="" go_role="1500" go_step="部長承認" id="start" name="起案" operator="起案者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　　　<opr act="disposal" go_org="" go_role="" go_step="" id="disposal" name="廃棄" operator="廃棄者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="部長承認" title="部長承認待ち"/>
+		<opr act="save" go_org="" go_role="" go_step="案件起案" id="returnSelf" name="引戻し" operator="引戻し者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　　　<opr act="save" go_org="00200" go_role="2500" go_step="総経理室長承認" id="confirm" name="承認" operator="承認者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　　　<opr act="save" go_org="" go_role="" go_step="案件起案" id="return" name="差戻し" operator="差戻し者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="総経理室長承認" title="総経理室長承認待ち"/>
+	　　　　<opr act="save" go_org="00170" go_role="1000" go_step="総経理承認" id="confirm" name="承認" operator="承認者" orgid="" roleid="" userid="" confirmTime=""/>
+		<opr act="save" go_org="" go_role="" go_step="総経理室長承認" id="save" name="保存" operator="保存者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　　　<opr act="save" go_org="" go_role="" go_step="案件起案" id="return" name="差戻し" operator="差戻し者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　</step>
+	　　
+	　　<step>
+	　　　　<state active="false" current="総経理承認" title="総経理承認待ち"/>
+	　　　　<opr act="save" go_org="00200" go_role="2500" go_step="開通状態" id="confirm" name="承認" operator="承認者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　　　<opr act="save" go_org="" go_role="" go_step="案件起案" id="return" name="差戻し" operator="差戻し者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="開通状態" title="開通"/>
+	　　　　<opr act="save" go_org="00150" go_role="7000" go_step="中止状態" id="confirm" name="中止" operator="中止者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　</step>
+	　　<step>
+	　　　　<state active="false" current="中止状態" title="中止"/>
+	　　　　<opr act="delete" go_org="" go_role="" go_step="" id="delete" name="案件削除" operator="削除者" orgid="" roleid="" userid="" confirmTime=""/>
+	　　</step>
+	</WorkFlow>
+	<Document>
+	</Document>
+</job>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<!--
+ * =================================================================
+ * NO.83XXXXXX
+ * ITEM = 001 ; REV = 00 ; DATE 2005/12/17
+ *
+ * (c) 2005 Yamatake Corporation All Rights Reserved.
+ * 
+ * ORIGINAL SOURCE INFORMATION
+ * 
+ * REVISION HISTORY
+ *			REV.00 2005/12/17 BY. Dong Hongwei (WXHX)
+ * =================================================================
+-->
+<!--
+ メニュー定義ファイル。
+-->
+<MenuConfig>
+  <Displayers>
+    <Displayer   name="DropDown"
+                 type="net.sf.navigator.displayer.DropDownMenuDisplayer"/>
+    <Displayer   name="Simple"
+                 type="net.sf.navigator.displayer.SimpleMenuDisplayer"/>
+    <Displayer   name="CoolMenu"
+                 type="net.sf.navigator.displayer.CoolMenuDisplayer"/>
+    <Displayer   name="CoolMenu4"
+                 type="net.sf.navigator.displayer.CoolMenuDisplayer4"/>
+    <Displayer   name="MenuForm"
+                 type="net.sf.navigator.example.PermissionsFormMenuDisplayer"/>
+    <Displayer   name="ListMenu"
+                 type="net.sf.navigator.displayer.ListMenuDisplayer"/>
+    <Displayer   name="TabbedMenu"
+                 type="net.sf.navigator.displayer.TabbedMenuDisplayer"/>
+    <Displayer   name="Velocity"
+                 type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
+  </Displayers>
+  <Menus>
+    <!-- New Menu for Tabbed Displayer -->
+	<!--
+		メニューの表示文字列（title属性の値）は、国際化のために、プロパティファイルのキーを
+		設定している。
+		実際の表示文字列は、ApplicationResouces.propertiesに設定されている。
+	-->
+	<Menu name="OrgSelect" title="組織の選択" page="/do/flowbuilder/OrgSelect" roles="1000,2500,2000,1500,1501,1502,1510,1520,1530,1540,1541,1542,1543,7000"/>
+	<Menu name="Manage" title="管理" roles="1000,2500,2000,1500,1501,1502,1510,1520,1530,1540,1541,1542,1543,7000">
+		<Item name="PasswordUpdate" title="パスワード変更" page="/do/flowbuilder/PasswordUpdate?method=view" roles="1000,2500,2000,1500,1501,1502,1510,1520,1530,1540,1541,1542,1543,7000"/>
+	</Menu>
+	
+	<Menu name="JobList" title="案件一覧" page="/do/flowbuilder/JobList?method=jobDetail" roles="user,1000,2500,2000,1500,1501,1502,1510,1520,1530,1540,1541,1542,1543,7000"/>
+	<Menu name="JobApplication" title="案件申請" roles="user,1000,2500,2000,1500,1501,1502,1510,1520,1530,1540,1541,1542,1543,7000" >
+		<Item name="GeneralItem" title="セキュリティ申込書" page="/do/flowbuilder/JobShow?method=create&amp;templateId=0001"  roles="user,1543"/>
+		<Item name="equipmentItem" title="設備申請" page="/do/flowbuilder/JobShow?method=create&amp;templateId=0002"  roles="user,1510,1520,1530,1540,1541,1542,1543"/>
+		<Item name="circularItem" title="回覧票" page="/do/flowbuilder/JobShow?method=create&amp;templateId=0003"  roles="user,1000,2500,2000,1500,1501,1502,1510,1520,1530,1540,1541,1542,1543,7000"/>
+		<Item name="restItem" title="休暇申請" page="/do/flowbuilder/JobShow?method=create&amp;templateId=0004"  roles="user,1510,1520,1530,1540,1541,1542,1543"/>
+		<Item name="businessItem" title="出張申請" page="/do/flowbuilder/JobShow?method=create&amp;templateId=0005"  roles="user,1510,1520,1530,1540,1541,1542,1543"/>
+		<Item name="zanngyouItem" title="残業申請" page="/do/flowbuilder/JobShow?method=create&amp;templateId=0006"  roles="user,1510,1520,1530,1540,1541,1542,1543"/>
+	</Menu>
+	<Menu name="UserManage" title="管理" roles="7000">
+		<Item name="AddUser" title="添加ユーザ" page="" roles="7000"/>
+	</Menu>
+ </Menus>
+</MenuConfig>

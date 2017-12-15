@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<colorTag>
+	<colors id="0001">
+		<color id="00011" info="マネージャ承認" value="Gray"/>
+		<color id="00012" info="グループ長承認" value="Aqua"/>
+		<color id="00013" info="部長承認" value="Navy"/>
+		<color id="00016" info="開通状態" value="Red"/>
+		<color id="00017" info="中止状態" value="black"/>
+	</colors>
+	<colors id="0002">
+		<color id="00011" info="マネージャ承認" value="Green"/>
+		<color id="00012" info="グループ長承認" value="Aqua"/>
+		<color id="00013" info="部長承認" value="Navy"/>
+		<color id="00016" info="開通状態" value="Red"/>
+		<color id="00017" info="中止状態" value="black"/>
+	</colors>
+</colorTag>
